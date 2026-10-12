@@ -28,6 +28,11 @@ Every `TODO(client)` / `TODO(client/legal)`, grouped by page/area. Updated as th
   - `m6SOo712028` — Brand clip
 - [ ] Facebook "Junaidi Group Highlights of HAJJ 2025" clip — guide.md flags this as the best hero-loop candidate; need the original file from the client.
 
+## Office
+
+- [ ] Office hours — not given anywhere in guide.md. Omitted from the Home office block and the Hajj 2027 contact block rather than guessed.
+- [ ] Office photo (O-01, entrance + front desk) and a map embed/pin — both pending the shoot described in design.md §11.
+
 ## Reviews
 
 - [ ] Google Business Profile access + permission to embed real, dated reviews. None are seeded (guide.md: hidden until real reviews exist; `Review.consent` can't be fabricated).

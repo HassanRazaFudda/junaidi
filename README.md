@@ -15,15 +15,15 @@ Node 24 LTS (`.nvmrc`). Switch to Node 26 after it enters Active LTS (28 Oct 202
 
 ## Scripts
 
-| Script | What |
-|---|---|
-| `pnpm dev` | Dev server |
-| `pnpm build` / `pnpm start` | Production build / serve |
-| `pnpm check` | `typecheck` + `lint` + `format:check` + `test` — the CI gate |
-| `pnpm typecheck` | `next typegen` then `tsc --noEmit` |
-| `pnpm lint` / `pnpm format` | ESLint / Prettier (`format` writes, `format:check` doesn't) |
-| `pnpm test` / `pnpm test:watch` | Vitest unit tests (`tests/unit/`) |
-| `pnpm e2e` | Playwright E2E + accessibility tests (`tests/e2e/`) |
+| Script                          | What                                                         |
+| ------------------------------- | ------------------------------------------------------------ |
+| `pnpm dev`                      | Dev server                                                   |
+| `pnpm build` / `pnpm start`     | Production build / serve                                     |
+| `pnpm check`                    | `typecheck` + `lint` + `format:check` + `test` — the CI gate |
+| `pnpm typecheck`                | `next typegen` then `tsc --noEmit`                           |
+| `pnpm lint` / `pnpm format`     | ESLint / Prettier (`format` writes, `format:check` doesn't)  |
+| `pnpm test` / `pnpm test:watch` | Vitest unit tests (`tests/unit/`)                            |
+| `pnpm e2e`                      | Playwright E2E + accessibility tests (`tests/e2e/`)          |
 
 ## Content layer
 

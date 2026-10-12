@@ -1,6 +1,7 @@
 import "server-only";
 import { cacheLife, cacheTag } from "next/cache";
 import { repository } from "@/content/repository";
+import { daysUntil, isPastDeadline } from "@/lib/season";
 import type { Locale } from "@/i18n/routing";
 import type { Package } from "@/content/types";
 
@@ -35,6 +36,23 @@ export async function getSeason(slug: string) {
   cacheLife("hours");
   cacheTag("seasons", `season:${slug}`);
   return repository.getSeason(slug);
+}
+
+// Next's Cache Components model treats `Date.now()` as an unstable
+// prerender-time value (same issue as the footer's copyright year —
+// DECISIONS.md #5f), so the deadline countdown is resolved here, inside a
+// cached function, rather than calling daysUntil()/isPastDeadline() with
+// their Date.now() defaults directly in a page component.
+export async function getSeasonDeadlineStatus(slug: string) {
+  "use cache";
+  cacheLife("hours");
+  cacheTag("seasons", `season:${slug}`);
+  const season = await repository.getSeason(slug);
+  if (!season) return null;
+  return {
+    days: daysUntil(season.bookingDeadline),
+    closed: isPastDeadline(season.bookingDeadline),
+  } as const;
 }
 
 // DECISIONS.md #3: Season.credentialLine (the Hajj 2027 / Al Wakeel
