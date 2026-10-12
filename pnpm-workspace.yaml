@@ -1,0 +1,29 @@
+# Supply-chain safety (code.md §2.1)
+minimumReleaseAge: 4320 # 3 days
+blockExoticSubdeps: true
+strictDepBuilds: true
+
+# code.md §1 pins these exact versions deliberately; they happen to be
+# younger than the 3-day maturity window as of this build (see DECISIONS.md).
+# This exempts only the exact pinned version from the age check, it does not
+# disable it for future (potentially malicious) releases of these packages.
+minimumReleaseAgeExclude:
+  - motion
+  - motion-dom
+  - motion-utils
+  - framer-motion
+  - lucide-react
+  - zod
+  - prettier
+  - vitest
+  - "@vitest/mocker"
+  - "@vitest/spy"
+  - tinybench
+
+# Only these packages may run install scripts
+allowBuilds:
+  sharp: true
+  "@tailwindcss/oxide": true
+  unrs-resolver: true
+  "@parcel/watcher": true # native file-watcher binary, pulled in by tooling
+  "@swc/core": true # Next.js/Vitest's native transpiler binary

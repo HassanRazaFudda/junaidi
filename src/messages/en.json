@@ -1,0 +1,136 @@
+{
+  "common": {
+    "brandName": "Junaidi Group",
+    "skipToContent": "Skip to content",
+    "whatsapp": "WhatsApp",
+    "call": "Call",
+    "viewDocument": "View document",
+    "loading": "Loading",
+    "close": "Close",
+    "readMore": "Read more",
+    "pendingHeading": "Being confirmed",
+    "pendingBody": "We're finalising this with the client. Message us and we'll share the latest directly."
+  },
+  "nav": {
+    "hajj2027": "Hajj 2027",
+    "umrah": "Umrah",
+    "flights": "Flights",
+    "visas": "Visas",
+    "holidays": "Holidays",
+    "about": "About",
+    "contact": "Contact",
+    "menu": "Menu"
+  },
+  "languageToggle": {
+    "ur": "اردو",
+    "en": "English"
+  },
+  "seasonStrip": {
+    "defaultCta": "See packages"
+  },
+  "header": {
+    "whatsappCta": "Message us on WhatsApp"
+  },
+  "footer": {
+    "officeHeading": "Office",
+    "credentialsHeading": "Licensed and registered",
+    "policiesHeading": "Policies",
+    "privacy": "Privacy",
+    "terms": "Terms",
+    "cancellation": "Cancellation policy",
+    "complaints": "Complaints",
+    "credentialsLink": "All credentials",
+    "rightsReserved": "All rights reserved."
+  },
+  "stickyContactBar": {
+    "whatsapp": "WhatsApp",
+    "call": "Call"
+  },
+  "hero": {
+    "ctaPackages": "See Hajj 2027 packages",
+    "ctaWhatsapp": "Message us on WhatsApp"
+  },
+  "services": {
+    "heading": "What we arrange",
+    "hajj": "Hajj 2027",
+    "umrah": "Umrah",
+    "flights": "Air tickets",
+    "visas": "Visa help",
+    "holidays": "Holidays"
+  },
+  "credentials": {
+    "heading": "Checked credentials",
+    "issuedBy": "Issued by",
+    "checkedOn": "Checked on",
+    "emptyHeading": "Credential verification in progress",
+    "emptyBody": "We're finalising the linked source documents for our licences with the client. Message us and we'll share them directly."
+  },
+  "route": {
+    "heading": "The route",
+    "subheading": "What Hajj with Junaidi looks like, day by day",
+    "youDo": "What you do",
+    "weDo": "What our team does",
+    "pendingTeamNote": "Being confirmed with the client's current Hajj 2027 package.",
+    "scholarReviewNote": "This sequence is pending review by the client's scholar before final publication."
+  },
+  "packages": {
+    "heading": "Hajj 2027 packages",
+    "compare": "Compare packages",
+    "filterShort": "Short",
+    "filterLong": "Long",
+    "view": "View",
+    "priceChecked": "Price checked on",
+    "soldOut": "Sold out",
+    "archived": "Archived",
+    "emptyHeading": "Packages are being finalised",
+    "emptyBody": "Hajj 2027 package details (hotels, pricing, inclusions) are being confirmed with the client. Message our Hajj desk for the latest.",
+    "howToBook": "How to book this package",
+    "whatsappAboutPackage": "WhatsApp us about this package"
+  },
+  "pastGroups": {
+    "heading": "Past groups"
+  },
+  "reviews": {
+    "heading": "Reviews"
+  },
+  "office": {
+    "heading": "Our office",
+    "hours": "Office hours",
+    "landline": "Landline"
+  },
+  "bookingSteps": {
+    "heading": "How private Hajj booking works in 2027",
+    "step1Title": "Compare our packages here",
+    "step2Title": "Open the Pak Hajj app or Hajj Portal",
+    "step2Body": "Choose the Junaidi / Al Wakeel package.",
+    "step3Title": "Pay through the portal only",
+    "step4Title": "We contact you",
+    "step4Body": "For documents, training and departure."
+  },
+  "form": {
+    "heading": "Send us an inquiry",
+    "name": "Full name",
+    "phone": "Mobile / WhatsApp number",
+    "service": "Service",
+    "serviceHajj": "Hajj",
+    "serviceUmrah": "Umrah",
+    "serviceFlights": "Flights",
+    "serviceVisa": "Visa",
+    "serviceHoliday": "Holiday",
+    "serviceOther": "Other",
+    "city": "Departure city",
+    "month": "Preferred month",
+    "travellers": "Number of travellers",
+    "message": "Message",
+    "submit": "Send inquiry",
+    "submitting": "Sending",
+    "sent": "Message sent",
+    "sentBody": "We reply within 2 office hours. Continue on WhatsApp for a faster reply.",
+    "continueOnWhatsapp": "Continue on WhatsApp",
+    "errorHeading": "Please check the form"
+  },
+  "pendingPage": {
+    "heading": "Being finalised",
+    "body": "This page is being prepared with the client's legal counsel and will be published before launch."
+  }
+}

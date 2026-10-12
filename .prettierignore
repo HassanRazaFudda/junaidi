@@ -1,0 +1,12 @@
+# Client/brief source documents — never reformatted, they're authoritative input.
+guide.md
+design.md
+code.md
+prompt.md
+
+# Generated, has its own format.
+pnpm-lock.yaml
+
+.next
+node_modules
+public

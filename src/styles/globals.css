@@ -1,0 +1,107 @@
+@import "tailwindcss";
+
+/*
+ * Design tokens. Source: design.md §4, with the colour/type reconciliation
+ * recorded in DECISIONS.md #1 — design.md's "brass"/"night"/Marcellus+Hanken
+ * Grotesk system is superseded by code.md §5.1's actual crimson/ink/Archivo
+ * tokens, which match the brief's own "Known facts" (#A00C20, #111726) and
+ * Definition of Done ("one crimson line motif, Archivo"). Spacing, radius,
+ * and the type *scale* (sizes/line-heights) are unchanged from design.md —
+ * those numbers already match code.md exactly.
+ */
+@theme {
+  --color-crimson: #a00c20;
+  --color-crimson-night: #d2404f; /* the route line / pins on the ink night-state only */
+  --color-ink: #111726;
+  --color-marble: #eceeea;
+  --color-paper: #ffffff;
+  --color-haze: #d3dee5;
+  --color-stone: #5e655f;
+  --color-ok: #2e6b4e;
+  --color-alert: #a23b2a;
+  --color-line: rgb(17 23 38 / 0.14);
+
+  /* route section state (animated by the GSAP enhancer, code.md §11.3) */
+  --color-route-bg: var(--color-marble);
+  --color-route-ink: var(--color-ink);
+
+  --radius-control: 6px; /* buttons, inputs */
+  --radius-panel: 14px; /* drawers, lightbox */
+
+  --ease-out-quint: cubic-bezier(0.22, 1, 0.36, 1);
+  --ease-in-out-cubic: cubic-bezier(0.65, 0, 0.35, 1);
+
+  --duration-micro: 120ms;
+  --duration-ui: 240ms;
+  --duration-panel: 400ms;
+  --duration-hero: 900ms;
+
+  /* 8pt spacing scale, design.md §4 */
+  --spacing-s1: 4px;
+  --spacing-s2: 8px;
+  --spacing-s3: 12px;
+  --spacing-s4: 16px;
+  --spacing-s5: 24px;
+  --spacing-s6: 32px;
+  --spacing-s7: 48px;
+  --spacing-s8: 72px;
+  --spacing-s9: 120px;
+
+  /* type scale — identical in design.md §2.3 and code.md §5.1 */
+  --text-display: clamp(2.5rem, 1.2rem + 4.2vw, 4.5rem);
+  --text-h1: clamp(2.25rem, 1.4rem + 2.8vw, 3.75rem);
+  --text-h2: clamp(1.75rem, 1.3rem + 1.4vw, 2.25rem);
+  --text-h3: 1.5rem;
+  --text-lead: 1.3125rem;
+  --text-body: 1.125rem;
+  --text-small: 1rem;
+  --text-caption: 0.875rem;
+}
+
+/* Fonts come from next/font CSS variables; `inline` resolves them at use time */
+@theme inline {
+  --font-sans: var(--font-archivo), system-ui, -apple-system, "Segoe UI", sans-serif;
+  --font-urdu: var(--font-nastaliq), "Jameel Noori Nastaleeq", serif;
+  --font-arabic: var(--font-amiri), "Traditional Arabic", serif;
+}
+
+@layer base {
+  :root {
+    --route-bg: var(--color-marble);
+    --route-ink: var(--color-ink);
+    color-scheme: light;
+  }
+  html {
+    background: var(--color-marble);
+    color: var(--color-ink);
+  }
+  body {
+    font-family: var(--font-sans);
+    font-size: var(--text-body);
+    line-height: 1.6;
+  }
+  html[lang="ur"] body {
+    font-family: var(--font-urdu);
+    font-size: 1.25rem;
+    line-height: 2;
+  }
+  :focus-visible {
+    outline: 2px solid var(--color-crimson);
+    outline-offset: 3px;
+  }
+  .font-display {
+    font-variation-settings: "wdth" 112;
+    font-weight: 650;
+    letter-spacing: -0.01em;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
