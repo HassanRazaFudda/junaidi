@@ -1,9 +1,11 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Image from "next/image";
 import { Menu, X } from "lucide-react";
 import { useTranslations } from "next-intl";
+import * as m from "motion/react-m";
+import { useScroll, useMotionValueEvent } from "motion/react";
 import { Link } from "@/i18n/navigation";
 import { Container } from "@/components/ui/container";
 import { WhatsAppIcon } from "@/components/ui/whatsapp-icon";
@@ -17,9 +19,11 @@ const navLinks = [
   { href: "/contact", key: "contact" },
 ] as const;
 
-// Scroll hide/show (design.md §7.2) is Checkpoint 3 work — this is the
-// static, fully keyboard- and no-JS-safe Checkpoint 1 version: always
-// visible, mobile menu is a plain (non-animated) disclosure.
+// design.md §7.2: "Header hide/show | Motion | scroll direction |
+// y: -100% / 0, 240ms, --ease-out | Always visible [reduced motion]."
+// Content underneath (nav links, WhatsApp button) is the same server-
+// rendered markup from Checkpoint 2 either way — this only adds the
+// hide/show transform on top.
 export function HeaderClient({
   brandName,
   whatsappNumber,
@@ -28,10 +32,30 @@ export function HeaderClient({
   whatsappNumber: string;
 }) {
   const [open, setOpen] = useState(false);
+  const [hidden, setHidden] = useState(false);
+  const { scrollY } = useScroll();
   const t = useTranslations();
 
+  useEffect(() => {
+    const reduce = matchMedia("(prefers-reduced-motion: reduce)").matches;
+    if (reduce) return;
+    const unsubscribe = scrollY.on("change", (y) => {
+      const previous = scrollY.getPrevious() ?? y;
+      setHidden(y > previous && y > 120);
+    });
+    return unsubscribe;
+  }, [scrollY]);
+
+  useMotionValueEvent(scrollY, "change", () => {
+    if (open) setOpen(false);
+  });
+
   return (
-    <header className="sticky top-0 z-40 border-b border-line bg-marble">
+    <m.header
+      animate={{ y: hidden ? "-100%" : "0%" }}
+      transition={{ duration: 0.24, ease: [0.22, 1, 0.36, 1] }}
+      className="sticky top-0 z-40 border-b border-line bg-marble"
+    >
       <Container className="flex h-18 items-center justify-between gap-4 py-3">
         <Link href="/" className="flex items-center gap-3" onClick={() => setOpen(false)}>
           <Image
@@ -103,6 +127,6 @@ export function HeaderClient({
           </a>
         </Container>
       </nav>
-    </header>
+    </m.header>
   );
 }

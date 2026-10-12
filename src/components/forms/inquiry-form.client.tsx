@@ -2,6 +2,9 @@
 
 import { useActionState } from "react";
 import { useTranslations } from "next-intl";
+import { Check } from "lucide-react";
+import { AnimatePresence } from "motion/react";
+import * as m from "motion/react-m";
 import { submitInquiry, type InquiryState } from "./actions";
 import { whatsappUrl } from "@/lib/whatsapp";
 import { cn } from "@/lib/cn";
@@ -28,100 +31,128 @@ export function InquiryForm({ whatsappNumber }: { whatsappNumber: string }) {
   const t = useTranslations("form");
   const errors = state.status === "error" ? state.fieldErrors : undefined;
 
-  if (state.status === "sent") {
-    return (
-      <div className="rounded-panel border border-line bg-paper p-6">
-        <p className="font-medium">{t("sent")}</p>
-        <p className="mt-2 text-stone">{t("sentBody")}</p>
-        <a
-          href={whatsappUrl(whatsappNumber, {})}
-          target="_blank"
-          rel="noopener noreferrer"
-          className="mt-4 inline-flex min-h-12 items-center rounded-control border border-ink px-5 font-medium"
-        >
-          {t("continueOnWhatsapp")}
-        </a>
-      </div>
-    );
-  }
-
+  // design.md §7.2 "Form submit": the button label change is a 240ms
+  // moment — here, a crossfade between the form and the confirmation
+  // panel (code.md §12.1 explicitly keeps the WhatsApp continuation link
+  // in that panel, so the whole view swaps, not just a label).
   return (
-    <form action={formAction} className="grid gap-5" noValidate>
-      {state.status === "error" && (
-        <p role="alert" className="text-alert">
-          {t("errorHeading")}
-        </p>
+    <AnimatePresence mode="wait">
+      {state.status === "sent" ? (
+        <m.div
+          key="sent"
+          initial={{ opacity: 0, y: 8 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.24, ease: [0.22, 1, 0.36, 1] }}
+          className="rounded-panel border border-line bg-paper p-6"
+        >
+          <p className="flex items-center gap-2 font-medium">
+            <Check aria-hidden className="size-5 text-ok" />
+            {t("sent")}
+          </p>
+          <p className="mt-2 text-stone">{t("sentBody")}</p>
+          <a
+            href={whatsappUrl(whatsappNumber, {})}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="mt-4 inline-flex min-h-12 items-center rounded-control border border-ink px-5 font-medium"
+          >
+            {t("continueOnWhatsapp")}
+          </a>
+        </m.div>
+      ) : (
+        <m.form
+          key="form"
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          exit={{ opacity: 0, y: -8 }}
+          transition={{ duration: 0.22 }}
+          action={formAction}
+          className="grid gap-5"
+          noValidate
+        >
+          {state.status === "error" && (
+            <p role="alert" className="text-alert">
+              {t("errorHeading")}
+            </p>
+          )}
+
+          {/* Honeypot: hidden from sighted and keyboard/screen-reader users. */}
+          <div aria-hidden="true" className="absolute -left-[9999px]">
+            <label htmlFor="company">Company</label>
+            <input id="company" name="company" type="text" tabIndex={-1} autoComplete="off" />
+          </div>
+
+          <Field label={t("name")} name="name" errors={errors?.name} required>
+            <input
+              id="name"
+              name="name"
+              type="text"
+              required
+              minLength={2}
+              maxLength={80}
+              className={inputClass}
+            />
+          </Field>
+
+          <Field label={t("phone")} name="phone" errors={errors?.phone} required>
+            <input id="phone" name="phone" type="tel" required className={inputClass} />
+          </Field>
+
+          <Field label={t("service")} name="service" errors={errors?.service} required>
+            <select id="service" name="service" required defaultValue="" className={inputClass}>
+              <option value="" disabled>
+                {t("service")}
+              </option>
+              {services.map((s) => (
+                <option key={s} value={s}>
+                  {t(serviceMessageKeys[s])}
+                </option>
+              ))}
+            </select>
+          </Field>
+
+          <div className="grid gap-5 sm:grid-cols-2">
+            <Field label={t("city")} name="city" errors={errors?.city}>
+              <input id="city" name="city" type="text" maxLength={60} className={inputClass} />
+            </Field>
+            <Field label={t("month")} name="month" errors={errors?.month}>
+              <input id="month" name="month" type="text" maxLength={30} className={inputClass} />
+            </Field>
+          </div>
+
+          <Field label={t("travellers")} name="travellers" errors={errors?.travellers} required>
+            <input
+              id="travellers"
+              name="travellers"
+              type="number"
+              required
+              min={1}
+              max={60}
+              defaultValue={1}
+              className={inputClass}
+            />
+          </Field>
+
+          <Field label={t("message")} name="message" errors={errors?.message}>
+            <textarea
+              id="message"
+              name="message"
+              rows={4}
+              maxLength={1000}
+              className={inputClass}
+            />
+          </Field>
+
+          <button
+            type="submit"
+            disabled={pending}
+            className="inline-flex min-h-12 items-center justify-center rounded-control bg-ink px-5 font-medium text-marble disabled:opacity-50"
+          >
+            {pending ? t("submitting") : t("submit")}
+          </button>
+        </m.form>
       )}
-
-      {/* Honeypot: hidden from sighted and keyboard/screen-reader users. */}
-      <div aria-hidden="true" className="absolute -left-[9999px]">
-        <label htmlFor="company">Company</label>
-        <input id="company" name="company" type="text" tabIndex={-1} autoComplete="off" />
-      </div>
-
-      <Field label={t("name")} name="name" errors={errors?.name} required>
-        <input
-          id="name"
-          name="name"
-          type="text"
-          required
-          minLength={2}
-          maxLength={80}
-          className={inputClass}
-        />
-      </Field>
-
-      <Field label={t("phone")} name="phone" errors={errors?.phone} required>
-        <input id="phone" name="phone" type="tel" required className={inputClass} />
-      </Field>
-
-      <Field label={t("service")} name="service" errors={errors?.service} required>
-        <select id="service" name="service" required defaultValue="" className={inputClass}>
-          <option value="" disabled>
-            {t("service")}
-          </option>
-          {services.map((s) => (
-            <option key={s} value={s}>
-              {t(serviceMessageKeys[s])}
-            </option>
-          ))}
-        </select>
-      </Field>
-
-      <div className="grid gap-5 sm:grid-cols-2">
-        <Field label={t("city")} name="city" errors={errors?.city}>
-          <input id="city" name="city" type="text" maxLength={60} className={inputClass} />
-        </Field>
-        <Field label={t("month")} name="month" errors={errors?.month}>
-          <input id="month" name="month" type="text" maxLength={30} className={inputClass} />
-        </Field>
-      </div>
-
-      <Field label={t("travellers")} name="travellers" errors={errors?.travellers} required>
-        <input
-          id="travellers"
-          name="travellers"
-          type="number"
-          required
-          min={1}
-          max={60}
-          defaultValue={1}
-          className={inputClass}
-        />
-      </Field>
-
-      <Field label={t("message")} name="message" errors={errors?.message}>
-        <textarea id="message" name="message" rows={4} maxLength={1000} className={inputClass} />
-      </Field>
-
-      <button
-        type="submit"
-        disabled={pending}
-        className="inline-flex min-h-12 items-center justify-center rounded-control bg-ink px-5 font-medium text-marble disabled:opacity-50"
-      >
-        {pending ? t("submitting") : t("submit")}
-      </button>
-    </form>
+    </AnimatePresence>
   );
 }
 

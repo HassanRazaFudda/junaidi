@@ -6,6 +6,7 @@ import { setRequestLocale } from "next-intl/server";
 import { routing } from "@/i18n/routing";
 import { archivo, nastaliq, amiri } from "./fonts";
 import { SkipLink } from "@/components/ui/skip-link";
+import { MotionProvider } from "@/components/motion/motion-provider.client";
 import { SeasonStrip } from "@/components/layout/season-strip";
 import { HeaderClient } from "@/components/layout/header.client";
 import { Footer } from "@/components/layout/footer";
@@ -48,14 +49,16 @@ export default async function LocaleLayout({
     >
       <body>
         <NextIntlClientProvider>
-          <SkipLink />
-          <SeasonStrip locale={locale as Locale} />
-          <HeaderClient brandName={site.brandName} whatsappNumber={site.whatsappNumber} />
-          <main id="main" className="pb-16 md:pb-0">
-            {children}
-          </main>
-          <Footer />
-          <StickyContactBar />
+          <MotionProvider>
+            <SkipLink />
+            <SeasonStrip locale={locale as Locale} />
+            <HeaderClient brandName={site.brandName} whatsappNumber={site.whatsappNumber} />
+            <main id="main" className="pb-16 md:pb-0">
+              {children}
+            </main>
+            <Footer />
+            <StickyContactBar />
+          </MotionProvider>
         </NextIntlClientProvider>
       </body>
     </html>

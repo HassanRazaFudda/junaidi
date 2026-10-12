@@ -1,4 +1,4 @@
-import { Accordion } from "@/components/ui/accordion";
+import { Accordion } from "@/components/ui/accordion.client";
 import { pick } from "@/content/localize";
 import type { LocalizedText } from "@/content/types";
 import type { Locale } from "@/i18n/routing";

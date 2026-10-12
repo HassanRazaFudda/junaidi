@@ -96,6 +96,67 @@
   }
 }
 
+/*
+ * Evidence drawer backdrop fade (design.md §7.2: "backdrop fades 240ms").
+ * ::backdrop can't be targeted by the Motion library (it's not a real DOM
+ * node), so this is a declarative CSS transition instead — @starting-style
+ * + allow-discrete lets a native <dialog>'s backdrop animate in AND out
+ * natively, synced to the dialog's own open/close lifecycle with no JS.
+ */
+dialog::backdrop {
+  background-color: rgb(17 23 38 / 0);
+  transition:
+    background-color var(--duration-ui) var(--ease-out-quint),
+    display var(--duration-ui) allow-discrete,
+    overlay var(--duration-ui) allow-discrete;
+}
+dialog[open]::backdrop {
+  background-color: rgb(17 23 38 / 0.4);
+}
+@starting-style {
+  dialog[open]::backdrop {
+    background-color: rgb(17 23 38 / 0);
+  }
+}
+
+/*
+ * The Manasik route's two layouts (code.md §11.3). Default: everything in
+ * normal document flow — map above, stops stacked below, fully readable
+ * with JS off or reduced motion. Once the GSAP enhancer sets
+ * data-enhanced="true" (desktop + motion allowed only), this switches to a
+ * pinned two-column stage where panels overlap in the same grid cell so
+ * GSAP can cross-fade between them as ScrollTrigger scrubs the timeline.
+ */
+.route-panel {
+  opacity: 1;
+  transform: none;
+}
+
+[data-route][data-enhanced="true"] .route-stage {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  align-items: center;
+  gap: var(--spacing-s7);
+  min-height: 100vh;
+}
+[data-route][data-enhanced="true"] .route-map-wrap {
+  position: sticky;
+  top: 0;
+}
+[data-route][data-enhanced="true"] .route-panels {
+  display: grid;
+}
+[data-route][data-enhanced="true"] .route-panel {
+  grid-area: 1 / 1;
+  opacity: 0;
+  transform: translateY(12px);
+  padding: 0;
+}
+[data-route][data-enhanced="true"] .route-panel:first-child {
+  opacity: 1;
+  transform: none;
+}
+
 @media (prefers-reduced-motion: reduce) {
   *,
   *::before,
