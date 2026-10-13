@@ -20,6 +20,7 @@ Every `TODO(client)` / `TODO(client/legal)`, grouped by page/area. Updated as th
 
 - [ ] Written confirmation of the Hajj 2027 arrangement with Al Wakeel Munazzam, and the exact wording approved for publication. Until this arrives, the credential line and all four licence/registration rows stay hidden site-wide (DECISIONS.md #3; confirmed as the default by the user at Checkpoint 0).
 - [ ] Hajj 2027 package list as it appears on the official portal: name, duration, price, Makkah hotel, Madinah hotel, distance claims (and how measured), Mina/Arafat category, flights, Qurbani, inclusions/exclusions. Nothing renders on `/hajj/2027` or any package page until this arrives (DECISIONS.md #5) — `src/content/local/data/packages.ts` is intentionally empty.
+- [ ] Current Umrah package list: name/month, duration, price, Makkah hotel, Madinah hotel, distance claims, tier (economy/standard/premium), flights, inclusions/exclusions — same specificity as Hajj above. The `/umrah` index and `/umrah/[slug]` detail routes, the home page's "Choose your month" section (tabs + tier filter) and its package cards are all built and live already (fix.md §11 step 5); they render nothing in live mode until real rows land in `src/content/local/data/packages.ts` the same way Hajj does. This moved up from "Blocking Phase 2" below once fix.md's v3 redesign put Umrah packages on the home page itself, not a later phase.
 - [ ] One primary WhatsApp number — guide.md §1.1 found two conflicting numbers in use (+92 332 2202656 on Facebook, +92 323 4271012 elsewhere). Site reads `NEXT_PUBLIC_WHATSAPP_NUMBER` from the environment; set the real number at deploy time.
 - [ ] One canonical email address — guide.md §1.5 found a Gmail address on Facebook and a junaidigroup.com address elsewhere, with no single confirmed one. Omitted from the site entirely until resolved (contact page currently shows landline/WhatsApp/office only).
 - [ ] Original files (not Facebook-downloaded/compressed copies) of the Hajj 2024/2025 videos, if they're to be used beyond the existing YouTube embeds.
@@ -55,7 +56,6 @@ Every `TODO(client)` / `TODO(client/legal)`, grouped by page/area. Updated as th
 ## Blocking Phase 2 (guide.md §3, for later reference)
 
 - [ ] IATA, DTS and Umrah attestation certificates (scans)
-- [ ] Current Umrah packages: hotels, nights, prices, transport, visa included or not
 - [ ] Which visa countries/categories are actually handled
 - [ ] Whether holiday packages are sold today, and which destinations/suppliers
 - [ ] Team members willing to appear on the site (name, role, photo)

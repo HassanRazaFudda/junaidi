@@ -201,6 +201,18 @@ dialog[open]::backdrop {
   transform: none;
 }
 
+/*
+ * fix.md §3.2: "One subtle geometric pattern (8-point star tiling, drawn
+ * as clean SVG) at 4-6% opacity on dark ink sections only." A clean
+ * 8-point star (two overlapping squares) tiled via an inline SVG data URI
+ * background — no extra image request, no AI generation needed for an
+ * abstract geometric tile.
+ */
+.pattern-star-ink {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='80' height='80' viewBox='0 0 80 80'%3E%3Cg fill='none' stroke='%23ECEEEA' stroke-width='1' opacity='0.06'%3E%3Crect x='20' y='20' width='40' height='40' transform='rotate(0 40 40)'/%3E%3Crect x='20' y='20' width='40' height='40' transform='rotate(45 40 40)'/%3E%3C/g%3E%3C/svg%3E");
+  background-size: 80px 80px;
+}
+
 @media (prefers-reduced-motion: reduce) {
   *,
   *::before,

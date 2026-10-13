@@ -1,3 +1,4 @@
+import Image from "next/image";
 import { getTranslations } from "next-intl/server";
 import { Section } from "@/components/ui/section";
 import { Container } from "@/components/ui/container";
@@ -9,12 +10,23 @@ import { cn } from "@/lib/cn";
 
 // fix.md §7: "[CTA BAND — ink + photo] 'Talk to our Hajj & Umrah desk'
 // phone · WhatsApp · office hours." Office hours omitted — unconfirmed,
-// same reasoning as components/home/office.tsx.
+// same reasoning as components/home/office.tsx. §6.2: "CTA band: Haram
+// night, heavily darkened." Photo credit: ASSETS-NEEDED.md.
 export async function CtaBand() {
   const [t, site] = await Promise.all([getTranslations(), getSiteSettings()]);
 
   return (
-    <Section className="bg-ink text-marble">
+    <Section className="relative overflow-hidden bg-ink text-marble">
+      <div className="absolute inset-0 -z-10">
+        <Image
+          src="https://images.unsplash.com/photo-1778567090660-6becd8b28312?q=80&w=1600&auto=format&fit=crop"
+          alt=""
+          fill
+          sizes="100vw"
+          className="object-cover opacity-25"
+        />
+        <div className="absolute inset-0 bg-ink/70" />
+      </div>
       <Container className="text-center">
         <h2 className="font-display text-h2">{t("ctaBand.heading")}</h2>
         <p className="mt-2 text-lead text-marble/80">{t("ctaBand.body")}</p>

@@ -15,9 +15,11 @@ const policyLinks = [
 ] as const;
 
 // fix.md §7: "services links · Hajj/Umrah links." Only real, live routes
-// (DECISIONS.md #5e) — Umrah/Flights/Visas pages don't exist in Phase 1.
+// (DECISIONS.md #5e) — Flights/Visas/Tours/Hotels still don't have their
+// own pages (DECISIONS.md #5r), but /umrah does now (fix.md §11 step 5).
 const serviceLinks = [
   { href: "/hajj/2027", label: "Hajj 2027" },
+  { href: "/umrah", label: "Umrah packages" },
   { href: "/hajj/how-private-hajj-booking-works", label: "How booking works" },
   { href: "/contact", label: "Contact" },
 ] as const;

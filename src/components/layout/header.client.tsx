@@ -13,9 +13,11 @@ import { buttonStyles } from "@/components/ui/button";
 import { whatsappUrl } from "@/lib/whatsapp";
 import { cn } from "@/lib/cn";
 
-// Phase 1 only lists routes that exist yet — DECISIONS.md #5e.
+// Phase 1 only lists routes that exist yet — DECISIONS.md #5e. /umrah was
+// added once its route (and demo-mode sample packages) landed in Step 5.
 const navLinks = [
   { href: "/hajj/2027", key: "hajj2027" },
+  { href: "/umrah", key: "umrah" },
   { href: "/about/credentials", key: "about" },
   { href: "/contact", key: "contact" },
 ] as const;

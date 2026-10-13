@@ -11,9 +11,11 @@ export function buildPackageMetadata(pkg: Package, locale: Locale): Metadata {
     pkg.priceFromPKR ? ` From PKR ${pkg.priceFromPKR.toLocaleString("en-PK")}.` : ""
   }`;
 
+  const path = pkg.type === "hajj" ? `/hajj/${pkg.seasonSlug}/${pkg.slug}` : `/umrah/${pkg.slug}`;
+
   return {
     title,
     description,
-    alternates: { canonical: `${env.NEXT_PUBLIC_SITE_URL}/hajj/${pkg.seasonSlug}/${pkg.slug}` },
+    alternates: { canonical: `${env.NEXT_PUBLIC_SITE_URL}${path}` },
   };
 }

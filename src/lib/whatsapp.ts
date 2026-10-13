@@ -1,6 +1,6 @@
 export function whatsappUrl(
   number: string,
-  parts: { packageName?: string; season?: string; travellers?: number },
+  parts: { packageName?: string; season?: string; travellers?: number; topic?: string },
 ) {
   const lines = ["Assalam o Alaikum,"];
   if (parts.packageName) {
@@ -9,6 +9,8 @@ export function whatsappUrl(
         parts.travellers ? ` for ${parts.travellers} travellers` : ""
       }.`,
     );
+  } else if (parts.topic) {
+    lines.push(`I'd like to ask about ${parts.topic}.`);
   } else {
     lines.push("I'd like to ask about your services.");
   }

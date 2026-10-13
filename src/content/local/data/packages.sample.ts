@@ -35,12 +35,12 @@ export const samplePackages: z.input<typeof Package>[] = [
     durationDays: 10,
     departureCities: ["Karachi"],
     photo: {
-      src: "https://images.unsplash.com/photo-1591604129939-f1efa4d9f7fa?q=80&w=1200&auto=format&fit=crop",
-      alt: { en: "Makkah skyline at dusk (sample)" },
+      src: "https://images.pexels.com/photos/19174886/pexels-photo-19174886/free-photo-of-illuminated-clock-tower-and-cityscape-at-dusk.jpeg?auto=compress&cs=tinysrgb&w=1200",
+      alt: { en: "Makkah clock tower and skyline at dusk (sample)" },
       width: 1200,
-      height: 750,
+      height: 900,
       source: "licensed",
-      credit: "Unsplash — see ASSETS-NEEDED.md for licence/credit",
+      credit: "Photo by Rushdi Fatani / Pexels — see ASSETS-NEEDED.md for licence",
     },
     hotels: [
       {
@@ -92,12 +92,12 @@ export const samplePackages: z.input<typeof Package>[] = [
     durationDays: 12,
     departureCities: ["Karachi"],
     photo: {
-      src: "https://images.unsplash.com/photo-1519817650390-64a93db51149?q=80&w=1200&auto=format&fit=crop",
-      alt: { en: "Makkah hotel district (sample)" },
+      src: "https://images.pexels.com/photos/38461889/pexels-photo-38461889/free-photo-of-arial-view-of-makkah-skyline-and-mountains.jpeg?auto=compress&cs=tinysrgb&w=1200",
+      alt: { en: "Makkah hotel district, aerial (sample)" },
       width: 1200,
-      height: 750,
+      height: 1800,
       source: "licensed",
-      credit: "Unsplash — see ASSETS-NEEDED.md for licence/credit",
+      credit: "Photo by Musaddek Sayek / Pexels — see ASSETS-NEEDED.md for licence",
     },
     hotels: [
       {
@@ -148,12 +148,12 @@ export const samplePackages: z.input<typeof Package>[] = [
     durationDays: 12,
     departureCities: ["Karachi"],
     photo: {
-      src: "https://images.unsplash.com/photo-1519817650390-64a93db51149?q=80&w=1200&auto=format&fit=crop",
-      alt: { en: "Makkah hotel district (sample)" },
+      src: "https://images.pexels.com/photos/38461889/pexels-photo-38461889/free-photo-of-arial-view-of-makkah-skyline-and-mountains.jpeg?auto=compress&cs=tinysrgb&w=1200",
+      alt: { en: "Makkah hotel district, aerial (sample)" },
       width: 1200,
-      height: 750,
+      height: 1800,
       source: "licensed",
-      credit: "Unsplash — see ASSETS-NEEDED.md for licence/credit",
+      credit: "Photo by Musaddek Sayek / Pexels — see ASSETS-NEEDED.md for licence",
     },
     hotels: [
       {
@@ -204,12 +204,12 @@ export const samplePackages: z.input<typeof Package>[] = [
     durationDays: 15,
     departureCities: ["Karachi"],
     photo: {
-      src: "https://images.unsplash.com/photo-1604135912569-c68a1a3d3eeb?q=80&w=1200&auto=format&fit=crop",
-      alt: { en: "Haram courtyard at night (sample)" },
+      src: "https://images.unsplash.com/photo-1778567090660-6becd8b28312?q=80&w=1200&auto=format&fit=crop",
+      alt: { en: "Clock tower above Masjid al-Haram at night (sample)" },
       width: 1200,
-      height: 750,
+      height: 1500,
       source: "licensed",
-      credit: "Unsplash — see ASSETS-NEEDED.md for licence/credit",
+      credit: "Photo by Ben Latif / Unsplash — see ASSETS-NEEDED.md for licence",
     },
     hotels: [
       {
@@ -260,12 +260,12 @@ export const samplePackages: z.input<typeof Package>[] = [
     durationDays: 10,
     departureCities: ["Karachi"],
     photo: {
-      src: "https://images.unsplash.com/photo-1591604129939-f1efa4d9f7fa?q=80&w=1200&auto=format&fit=crop",
-      alt: { en: "Makkah skyline at dusk (sample)" },
+      src: "https://images.pexels.com/photos/19174886/pexels-photo-19174886/free-photo-of-illuminated-clock-tower-and-cityscape-at-dusk.jpeg?auto=compress&cs=tinysrgb&w=1200",
+      alt: { en: "Makkah clock tower and skyline at dusk (sample)" },
       width: 1200,
-      height: 750,
+      height: 900,
       source: "licensed",
-      credit: "Unsplash — see ASSETS-NEEDED.md for licence/credit",
+      credit: "Photo by Rushdi Fatani / Pexels — see ASSETS-NEEDED.md for licence",
     },
     hotels: [
       {
@@ -311,12 +311,12 @@ export const samplePackages: z.input<typeof Package>[] = [
     durationDays: 15,
     departureCities: ["Karachi"],
     photo: {
-      src: "https://images.unsplash.com/photo-1604135912569-c68a1a3d3eeb?q=80&w=1200&auto=format&fit=crop",
-      alt: { en: "Haram courtyard at night (sample)" },
+      src: "https://images.unsplash.com/photo-1778567090660-6becd8b28312?q=80&w=1200&auto=format&fit=crop",
+      alt: { en: "Clock tower above Masjid al-Haram at night (sample)" },
       width: 1200,
-      height: 750,
+      height: 1500,
       source: "licensed",
-      credit: "Unsplash — see ASSETS-NEEDED.md for licence/credit",
+      credit: "Photo by Ben Latif / Unsplash — see ASSETS-NEEDED.md for licence",
     },
     hotels: [
       {
@@ -368,12 +368,12 @@ export const samplePackages: z.input<typeof Package>[] = [
     durationDays: 20,
     departureCities: ["Karachi"],
     photo: {
-      src: "https://images.unsplash.com/photo-1519669417670-68775a50919e?q=80&w=1200&auto=format&fit=crop",
-      alt: { en: "Mina tents, wide (sample)" },
+      src: "https://images.pexels.com/photos/35666328/pexels-photo-35666328/free-photo-of-traditional-berber-tents-in-m-hamid-el-ghizlane-desert.jpeg?auto=compress&cs=tinysrgb&w=1200",
+      alt: { en: "Desert tent camp, illustrative — not our actual Mina camp (sample)" },
       width: 1200,
-      height: 750,
+      height: 1800,
       source: "licensed",
-      credit: "Unsplash — see ASSETS-NEEDED.md for licence/credit",
+      credit: "Photo by Moussa Idrissi / Pexels — see ASSETS-NEEDED.md for licence",
     },
     hotels: [
       {
@@ -429,12 +429,12 @@ export const samplePackages: z.input<typeof Package>[] = [
     durationDays: 35,
     departureCities: ["Karachi"],
     photo: {
-      src: "https://images.unsplash.com/photo-1591610423714-eed2ecbb837a?q=80&w=1200&auto=format&fit=crop",
-      alt: { en: "Arafat plain, wide (sample)" },
+      src: "https://images.pexels.com/photos/37676612/pexels-photo-37676612/free-photo-of-vast-desert-landscape-with-mountain-range.png?auto=compress&cs=tinysrgb&w=1200",
+      alt: { en: "Plain and mountains, illustrative — not Jabal al-Rahma (sample)" },
       width: 1200,
-      height: 750,
+      height: 800,
       source: "licensed",
-      credit: "Unsplash — see ASSETS-NEEDED.md for licence/credit",
+      credit: "Photo by Veronika Latysheva / Pexels — see ASSETS-NEEDED.md for licence",
     },
     hotels: [
       {
@@ -491,12 +491,12 @@ export const samplePackages: z.input<typeof Package>[] = [
     durationDays: 28,
     departureCities: ["Karachi"],
     photo: {
-      src: "https://images.unsplash.com/photo-1519817650390-64a93db51149?q=80&w=1200&auto=format&fit=crop",
-      alt: { en: "Makkah hotel district (sample)" },
+      src: "https://images.pexels.com/photos/38461889/pexels-photo-38461889/free-photo-of-arial-view-of-makkah-skyline-and-mountains.jpeg?auto=compress&cs=tinysrgb&w=1200",
+      alt: { en: "Makkah hotel district, aerial (sample)" },
       width: 1200,
-      height: 750,
+      height: 1800,
       source: "licensed",
-      credit: "Unsplash — see ASSETS-NEEDED.md for licence/credit",
+      credit: "Photo by Musaddek Sayek / Pexels — see ASSETS-NEEDED.md for licence",
     },
     hotels: [
       {

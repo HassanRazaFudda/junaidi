@@ -50,23 +50,27 @@
   },
   "hero": {
     "headline": "Hajj and Umrah from Karachi, with a team that travels with you.",
+    "subhead": "Licensed packages, real group leaders, and a Karachi office you can visit.",
+    "ctaUmrah": "View Umrah packages",
     "ctaPackages": "See Hajj 2027 packages",
     "ctaWhatsapp": "Message us on WhatsApp"
   },
-  "services": {
-    "heading": "What we arrange",
-    "hajj": "Hajj 2027",
-    "umrah": "Umrah",
-    "flights": "Air tickets",
-    "visas": "Visa help",
-    "holidays": "Holidays"
+  "servicesCards": {
+    "eyebrow": "Other services",
+    "heading": "Everything else for your trip",
+    "flights": { "label": "Air tickets", "topic": "air tickets" },
+    "visa": { "label": "Visa assistance", "topic": "visa assistance" },
+    "tours": { "label": "International tours", "topic": "international tours" },
+    "hotels": { "label": "Hotels & transport", "topic": "hotels and transport" }
+  },
+  "hajjBand": {
+    "eyebrow": "Hajj 2027",
+    "heading": "Hajj 2027 private packages",
+    "note": "Booking and payment only through the official Pak Hajj app."
   },
   "credentials": {
-    "heading": "Checked credentials",
     "issuedBy": "Issued by",
-    "checkedOn": "Checked on",
-    "emptyHeading": "Credential verification in progress",
-    "emptyBody": "We're finalising the linked source documents for our licences with the client. Message us and we'll share them directly."
+    "checkedOn": "Checked on"
   },
   "route": {
     "heading": "The route",
@@ -101,12 +105,8 @@
     "heading": "Past groups"
   },
   "reviews": {
-    "heading": "Reviews"
-  },
-  "office": {
-    "heading": "Our office",
-    "hours": "Office hours",
-    "landline": "Landline"
+    "eyebrow": "Testimonials",
+    "heading": "What travellers say"
   },
   "bookingSteps": {
     "heading": "How private Hajj booking works in 2027",
@@ -149,7 +149,7 @@
     "service": "Service",
     "month": "Month",
     "travellers": "Travellers",
-    "whatsappNumber": "Your WhatsApp number",
+    "whatsappNumber": "WhatsApp number",
     "getQuote": "Get a quote",
     "sending": "Sending",
     "sent": "Sent — we'll reply on WhatsApp",

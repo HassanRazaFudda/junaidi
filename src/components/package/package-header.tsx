@@ -41,15 +41,17 @@ export async function PackageHeader({
         )}
       </p>
       <div className="mt-6 flex flex-wrap gap-4">
-        <a
-          href="#how-booking-works"
-          className={cn(
-            buttonStyles.primary,
-            "inline-flex min-h-12 items-center rounded-control px-5",
-          )}
-        >
-          {t("howToBook")}
-        </a>
+        {pkg.officialBookingUrl && (
+          <a
+            href="#how-booking-works"
+            className={cn(
+              buttonStyles.primary,
+              "inline-flex min-h-12 items-center rounded-control px-5",
+            )}
+          >
+            {t("howToBook")}
+          </a>
+        )}
         <a
           href={whatsappUrl(whatsappNumber, {
             packageName: pick(pkg.title, locale),

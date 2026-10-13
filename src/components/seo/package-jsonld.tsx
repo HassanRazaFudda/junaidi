@@ -9,6 +9,7 @@ import type { Locale } from "@/i18n/routing";
 // "FAQPage where FAQs are visible." Both render only once a package
 // actually has that data — never fabricated.
 export function PackageJsonLd({ pkg, locale }: { pkg: Package; locale: Locale }) {
+  const path = pkg.type === "hajj" ? `/hajj/${pkg.seasonSlug}/${pkg.slug}` : `/umrah/${pkg.slug}`;
   const product: WithContext<Product> | null = pkg.priceFromPKR
     ? {
         "@context": "https://schema.org",
@@ -21,7 +22,7 @@ export function PackageJsonLd({ pkg, locale }: { pkg: Package; locale: Locale })
           availability:
             pkg.status === "live" ? "https://schema.org/InStock" : "https://schema.org/SoldOut",
           validThrough: pkg.validUntil,
-          url: `${env.NEXT_PUBLIC_SITE_URL}/hajj/${pkg.seasonSlug}/${pkg.slug}`,
+          url: `${env.NEXT_PUBLIC_SITE_URL}${path}`,
         },
       }
     : null;
