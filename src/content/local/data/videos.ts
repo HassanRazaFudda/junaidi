@@ -10,6 +10,14 @@ import type { Video } from "@/content/schema";
 // footage. `openedAndReviewed: false` on every row, and the local adapter
 // filters listVideos() to openedAndReviewed only, so none render until a
 // human actually screens each video and flips the flag. See CLIENT-TODO.md.
+//
+// G3-Y2EFkwps was added by fix.md §5.2, which asked to "verify each ID
+// loads" — confirmed via browser: it's real, titled "Junaidi Group Our
+// exclusive Hajj package offers the best location," on the client's actual
+// "Junaidi Air Travels" channel (55.5K subscribers). "Loads" and "reviewed
+// for consent/face-visibility compliance" are different bars, though —
+// this still needs the same human review as the other four before
+// openedAndReviewed flips to true.
 export const videos: z.input<typeof Video>[] = [
   {
     youtubeId: "kvf_3_NYtSY",
@@ -41,6 +49,14 @@ export const videos: z.input<typeof Video>[] = [
     seasonLabel: "2024",
     season: "brand",
     category: "brand",
+    openedAndReviewed: false,
+  },
+  {
+    youtubeId: "G3-Y2EFkwps",
+    title: { en: "Junaidi Group — our exclusive Hajj package offers the best location" },
+    seasonLabel: "Hajj",
+    season: "hajj-2025",
+    category: "hajj",
     openedAndReviewed: false,
   },
 ];

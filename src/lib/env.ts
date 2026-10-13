@@ -12,10 +12,14 @@ export const env = createEnv({
     NEXT_PUBLIC_SITE_URL: z.url(),
     NEXT_PUBLIC_WHATSAPP_NUMBER: z.string().regex(/^92\d{10}$/),
     NEXT_PUBLIC_GA_ID: z.string().optional(),
+    // fix.md §5.1: review-build-only content mode. Defaults to "live" so
+    // forgetting to set it never accidentally turns demo content on.
+    NEXT_PUBLIC_CONTENT_MODE: z.enum(["demo", "live"]).default("live"),
   },
   experimental__runtimeEnv: {
     NEXT_PUBLIC_SITE_URL: process.env.NEXT_PUBLIC_SITE_URL,
     NEXT_PUBLIC_WHATSAPP_NUMBER: process.env.NEXT_PUBLIC_WHATSAPP_NUMBER,
     NEXT_PUBLIC_GA_ID: process.env.NEXT_PUBLIC_GA_ID,
+    NEXT_PUBLIC_CONTENT_MODE: process.env.NEXT_PUBLIC_CONTENT_MODE,
   },
 });

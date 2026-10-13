@@ -11,6 +11,8 @@ import { SeasonStrip } from "@/components/layout/season-strip";
 import { HeaderClient } from "@/components/layout/header.client";
 import { Footer } from "@/components/layout/footer";
 import { StickyContactBar } from "@/components/layout/sticky-contact-bar";
+import { FloatingWhatsApp } from "@/components/layout/floating-whatsapp.client";
+import { DemoBanner } from "@/components/layout/demo-banner";
 import { getSiteSettings } from "@/content/queries";
 import { TravelAgencyJsonLd } from "@/components/seo/travel-agency-jsonld";
 import { env } from "@/lib/env";
@@ -65,6 +67,7 @@ export default async function LocaleLayout({
         <NextIntlClientProvider>
           <MotionProvider>
             <SkipLink />
+            <DemoBanner />
             <SeasonStrip locale={locale as Locale} />
             <HeaderClient brandName={site.brandName} whatsappNumber={site.whatsappNumber} />
             <main id="main" className="pb-16 md:pb-0">
@@ -72,6 +75,7 @@ export default async function LocaleLayout({
             </main>
             <Footer />
             <StickyContactBar />
+            <FloatingWhatsApp whatsappNumber={site.whatsappNumber} />
           </MotionProvider>
         </NextIntlClientProvider>
       </body>

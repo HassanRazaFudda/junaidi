@@ -21,9 +21,9 @@ export async function ServicesIndex() {
               className="flex items-baseline justify-between gap-4 py-6 hover:text-crimson"
             >
               <span className="font-display text-h3">{t("services.hajj")}</span>
-              <span className="text-small text-stone">
-                {packageCount > 0 ? `${packageCount} packages` : t("packages.emptyHeading")}
-              </span>
+              {packageCount > 0 && (
+                <span className="text-small text-stone">{packageCount} packages</span>
+              )}
             </Link>
           </li>
         </ul>

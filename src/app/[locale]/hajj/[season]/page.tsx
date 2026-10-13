@@ -77,12 +77,10 @@ export default async function HajjSeasonPage({
               {days} day{days === 1 ? "" : "s"} left to book on the Pak Hajj app.
             </p>
           )}
-          {credentialConfirmed ? (
+          {credentialConfirmed && (
             <p className="mt-2 max-w-prose text-stone">
               {pick(season.credentialLine, locale as Locale)}
             </p>
-          ) : (
-            <p className="mt-2 max-w-prose text-stone italic">{t("credentials.emptyBody")}</p>
           )}
         </Container>
       </Section>
@@ -93,23 +91,18 @@ export default async function HajjSeasonPage({
         </Container>
       </Section>
 
-      <Section className="border-t border-line">
-        <Container>
-          <h2 className="font-display text-h2">{t("packages.heading")}</h2>
-          {packages.length > 0 ? (
+      {packages.length > 0 && (
+        <Section className="border-t border-line">
+          <Container>
+            <h2 className="font-display text-h2">{t("packages.heading")}</h2>
             <ul className="mt-6">
               {packages.map((pkg) => (
                 <PackageRow key={pkg.id} pkg={pkg} locale={locale as Locale} />
               ))}
             </ul>
-          ) : (
-            <div className="mt-6 max-w-prose rounded-panel border border-line bg-paper p-6">
-              <p className="font-medium">{t("packages.emptyHeading")}</p>
-              <p className="mt-2 text-stone">{t("packages.emptyBody")}</p>
-            </div>
-          )}
-        </Container>
-      </Section>
+          </Container>
+        </Section>
+      )}
 
       <PastGroups locale={locale as Locale} />
 

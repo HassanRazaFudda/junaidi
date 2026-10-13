@@ -4,7 +4,10 @@ test.use({ reducedMotion: "reduce" });
 
 // code.md §16: "Route section readable and complete; no hidden content."
 test.describe("Reduced motion", () => {
-  test("the route section shows every stop, not pinned or cross-faded", async ({ page }) => {
+  // fix.md §3.2/§9.1 removed the pinned route from home — it's rebuilt as
+  // a non-pinned stepper on /hajj/2027 in fix.md §11 step 7. Re-enable this
+  // test, pointed at that page, once that step lands.
+  test.skip("the route section shows every stop, not pinned or cross-faded", async ({ page }) => {
     await page.goto("/");
     const route = page.locator("[data-route]");
     await route.scrollIntoViewIfNeeded();

@@ -40,6 +40,7 @@ Every `TODO(client)` / `TODO(client/legal)`, grouped by page/area. Updated as th
   - `zM_GAKnPZZw` — VIP/Deluxe halls in Arafat, Hajj 2025
   - `YhAEdfjsmgA` — VIP camps in Mina, Hajj 2025
   - `m6SOo712028` — Brand clip
+  - `G3-Y2EFkwps` — "Our exclusive Hajj package offers the best location" (added per fix.md §5.2; confirmed real via browser, on the client's own channel, not yet screened for consent)
 - [ ] Facebook "Junaidi Group Highlights of HAJJ 2025" clip — guide.md flags this as the best hero-loop candidate; need the original file from the client.
 
 ## Office

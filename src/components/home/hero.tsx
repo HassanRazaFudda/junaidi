@@ -63,24 +63,18 @@ export async function Hero({ locale, whatsappNumber }: { locale: Locale; whatsap
       </div>
 
       {/*
-        Two nested clip-paths: the inner one is the permanent arch shape
-        (design.md §2.4's one shape motif); the outer one is what
-        HeroLoadSequenceEnhancer animates for the "reveals bottom-up" load
-        effect (design.md §7.2), independently of the arch shape itself.
+        fix.md §9.2 quick fix: arch clip-path removed (it read as an empty
+        shape with no real footage behind it yet). hero-arch-reveal is kept
+        as the class HeroLoadSequenceEnhancer's bottom-up reveal targets —
+        Step 5 replaces this whole block with the full-bleed photo hero.
       */}
       <div className="hero-arch-reveal">
-        <div className="hero-arch" style={{ clipPath: "url(#hero-arch)" }}>
-          <svg width="0" height="0" aria-hidden>
-            <clipPath id="hero-arch" clipPathUnits="objectBoundingBox">
-              <path d="M0,1 L0,0.45 C0,0.18 0.22,0 0.5,0 C0.78,0 1,0.18 1,0.45 L1,1 Z" />
-            </clipPath>
-          </svg>
-          <PlaceholderMedia
-            assetId="H-01 / H-02"
-            description="Hero portrait video loop + poster (client footage pending — guide.md §1.6)"
-            aspect="aspect-[4/5]"
-          />
-        </div>
+        <PlaceholderMedia
+          assetId="H-01 / H-02"
+          description="Hero portrait video loop + poster (client footage pending — guide.md §1.6)"
+          aspect="aspect-[4/5]"
+          className="rounded-panel"
+        />
       </div>
       <HeroLoadSequenceEnhancer />
     </Container>

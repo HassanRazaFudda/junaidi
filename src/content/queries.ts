@@ -59,12 +59,22 @@ export async function getSeasonDeadlineStatus(slug: string) {
 // authorisation claim) only renders once the linked Credential record has
 // verifiedByClient: true. This resolves that check so pages never have to
 // reach into the Credential list themselves.
+//
+// Checks the credential's actual `verifiedByClient` field, not just its
+// presence in listCredentials() — in demo mode (fix.md §5.2) that list
+// includes every credential for layout review regardless of confirmation
+// status, so "is it in the list" and "is it actually confirmed" are
+// different questions once demo mode exists. Conflating them was a real
+// bug: it made the hero and /hajj/2027 render the Al Wakeel authorisation
+// claim as settled fact in demo mode, when it's still pending — caught via
+// a screenshot review, not inspection, which is exactly why fix.md asks
+// for screenshots after each step.
 export async function isCredentialConfirmed(credentialId: string) {
   "use cache";
   cacheLife("hours");
   cacheTag("credentials");
   const creds = await repository.listCredentials();
-  return creds.some((c) => c.id === credentialId);
+  return creds.some((c) => c.id === credentialId && c.verifiedByClient);
 }
 
 export async function getPackage(type: Package["type"], slug: string) {

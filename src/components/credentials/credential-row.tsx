@@ -23,6 +23,11 @@ export async function CredentialRow({
         <p className="text-small text-stone">
           {credential.issuer} · {credential.validity}
         </p>
+        {/* fix.md §5.2: demo mode shows real, sourced credentials even
+            before client sign-off, but never as a settled claim. */}
+        {!credential.verifiedByClient && (
+          <p className="text-caption text-stone italic">Pending client confirmation</p>
+        )}
       </div>
       <Drawer
         trigger={

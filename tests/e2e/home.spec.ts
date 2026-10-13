@@ -20,12 +20,18 @@ test.describe("Home", () => {
     expect(decodeURIComponent(href!)).toContain("I'd like to ask about your services.");
   });
 
-  test("shows the honest pending state for packages and credentials, not invented facts", async ({
+  test("in live mode, sections with nothing confirmed are simply absent — never a placeholder fact", async ({
     page,
   }) => {
+    // fix.md §9.3: no "pending"/"being finalised" messaging on public
+    // pages — the section hides entirely instead. In live mode (what this
+    // suite always runs against — playwright.config.ts forces it) there
+    // are no real packages or confirmed credentials yet, so neither
+    // section renders at all.
     await page.goto("/");
-    await expect(page.getByText("Packages are being finalised").first()).toBeVisible();
-    await expect(page.getByText("Credential verification in progress")).toBeVisible();
+    await expect(page.getByText(/being finalised/i)).toHaveCount(0);
+    await expect(page.getByText(/verification in progress/i)).toHaveCount(0);
+    await expect(page.getByRole("heading", { name: "Checked credentials" })).toHaveCount(0);
   });
 
   test("footer shows the real confirmed office address and landline", async ({ page }) => {

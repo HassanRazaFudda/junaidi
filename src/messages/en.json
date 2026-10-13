@@ -29,7 +29,8 @@
     "defaultCta": "See packages"
   },
   "header": {
-    "whatsappCta": "Message us on WhatsApp"
+    "whatsappCta": "Message us on WhatsApp",
+    "chatWithUs": "Chat with us"
   },
   "footer": {
     "officeHeading": "Office",

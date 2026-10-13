@@ -22,9 +22,15 @@ test.describe("/hajj/2027", () => {
     await expect(page.getByText("Pay through the portal only")).toBeVisible();
   });
 
-  test("shows the honest pending state when no packages exist yet", async ({ page }) => {
+  test("the packages section is absent in live mode, never a placeholder fact", async ({
+    page,
+  }) => {
+    // fix.md §9.3: no "pending"/"being finalised" messaging — hidden
+    // entirely instead. This suite always runs in live mode
+    // (playwright.config.ts), where no real Hajj 2027 packages exist yet.
     await page.goto("/hajj/2027");
-    await expect(page.getByText("Packages are being finalised")).toBeVisible();
+    await expect(page.getByText(/being finalised/i)).toHaveCount(0);
+    await expect(page.getByRole("heading", { name: "Hajj 2027 packages" })).toHaveCount(0);
   });
 
   test("the booking guide page carries the same four steps and a scholar-review note", async ({

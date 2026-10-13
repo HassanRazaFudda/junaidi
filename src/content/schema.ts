@@ -20,6 +20,7 @@ export const Hotel = z.object({
   distanceMeters: z.number().int().positive().optional(),
   distanceNote: LocalizedText.optional(), // how it was measured
   roomSharing: LocalizedText,
+  stars: z.number().int().min(1).max(5).optional(), // fix.md §4.1 package card
   photos: z.array(ImageRef).default([]),
 });
 
@@ -56,6 +57,18 @@ export const Package = z
     videos: z
       .array(z.object({ youtubeId: z.string(), title: LocalizedText, seasonLabel: z.string() }))
       .default([]),
+    // fix.md §4.1/§5: package-card fields. tierLabel is a free-form badge
+    // ("Economy"/"Standard"/"Premium" for Umrah, "Short"/"Long"/"Premium"
+    // for Hajj) rather than an enum, since the two product types use
+    // different tier vocabularies. month is Umrah-specific, used for the
+    // home page's month tabs (fix.md §7).
+    tierLabel: LocalizedText.optional(),
+    month: LocalizedText.optional(),
+    priceBasis: LocalizedText.optional(), // e.g. "per person, quad sharing"
+    photo: ImageRef.optional(), // card hero image, 16:10
+    // fix.md §5.1: demo-only entries, gated by NEXT_PUBLIC_CONTENT_MODE —
+    // never shown in live mode, never real facts (DECISIONS.md).
+    sample: z.boolean().default(false),
   })
   .superRefine((p, ctx) => {
     // guide.md §2: a live package must show a price-checked date if it shows a price
@@ -103,15 +116,30 @@ export const Credential = z.object({
   verifiedByClient: z.boolean(), // false = never rendered
 });
 
-export const Review = z.object({
-  id: z.string(),
-  author: z.string(),
-  season: z.string(),
-  text: LocalizedText,
-  source: z.enum(["google", "facebook", "direct"]),
-  date: z.iso.date(),
-  consent: z.literal(true), // cannot add a review without consent
-});
+export const Review = z
+  .object({
+    id: z.string(),
+    author: z.string(),
+    season: z.string(),
+    text: LocalizedText,
+    source: z.enum(["google", "facebook", "direct"]),
+    date: z.iso.date(),
+    consent: z.boolean(),
+    // fix.md §5.2: demo-only testimonials ("3, sample: true, generic first
+    // names, no photos") — these aren't real people, so "consent" doesn't
+    // apply the way it does to a real reviewer; superRefine below only
+    // requires consent:true for non-sample (real) reviews.
+    sample: z.boolean().default(false),
+  })
+  .superRefine((r, ctx) => {
+    if (!r.sample && r.consent !== true) {
+      ctx.addIssue({
+        code: "custom",
+        message: "A real (non-sample) review must have consent on file",
+        path: ["consent"],
+      });
+    }
+  });
 
 export const Video = z.object({
   youtubeId: z.string(),

@@ -5,29 +5,25 @@ import { Section } from "@/components/ui/section";
 import { Container } from "@/components/ui/container";
 import type { Locale } from "@/i18n/routing";
 
-// guide.md §5.1 row 4: "Prove legitimacy." In Phase 1 this is almost always
-// the pending state — every Credential is unverified until the client
-// confirms in writing (DECISIONS.md #3) — but the section still has to say
-// something honest rather than render nothing at all.
+// guide.md §5.1 row 4: "Prove legitimacy." fix.md §9.3: no "pending" panel
+// on public pages — the section hides entirely when there's nothing
+// confirmed to show, rather than announcing its own emptiness. Demo mode
+// (fix.md §5) fills this with clearly-labelled sample credentials on
+// staging; in live mode with no verified credentials, there's simply no
+// section here, same as Reviews/PastGroups already did.
 export async function CredentialsSection({ locale }: { locale: Locale }) {
   const [t, credentials] = await Promise.all([getTranslations("credentials"), listCredentials()]);
+  if (credentials.length === 0) return null;
 
   return (
     <Section className="border-t border-line">
       <Container>
         <h2 className="font-display text-h2">{t("heading")}</h2>
-        {credentials.length > 0 ? (
-          <ul className="mt-6">
-            {credentials.map((c) => (
-              <CredentialRow key={c.id} credential={c} locale={locale} />
-            ))}
-          </ul>
-        ) : (
-          <div className="mt-6 max-w-prose rounded-panel border border-line bg-paper p-6">
-            <p className="font-medium">{t("emptyHeading")}</p>
-            <p className="mt-2 text-stone">{t("emptyBody")}</p>
-          </div>
-        )}
+        <ul className="mt-6">
+          {credentials.map((c) => (
+            <CredentialRow key={c.id} credential={c} locale={locale} />
+          ))}
+        </ul>
       </Container>
     </Section>
   );

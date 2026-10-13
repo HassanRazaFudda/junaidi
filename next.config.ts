@@ -5,6 +5,18 @@ const withNextIntl = createNextIntlPlugin("./src/i18n/request.ts");
 
 const isProd = process.env.NODE_ENV === "production";
 
+// fix.md §5.1: demo content (sample packages/photos/testimonials, clearly
+// labelled) can never reach the real production site. VERCEL_ENV is unset
+// locally, so this only fires on an actual Vercel production deploy — a
+// local `next build` with demo mode on (for our own review/testing) is
+// unaffected.
+if (process.env.NEXT_PUBLIC_CONTENT_MODE === "demo" && process.env.VERCEL_ENV === "production") {
+  throw new Error(
+    "NEXT_PUBLIC_CONTENT_MODE=demo must never be set on a production deploy (fix.md §5.1). " +
+      "Set it to 'live' (or unset it) in the production environment's variables.",
+  );
+}
+
 // Static-friendly CSP (no nonce: nonces force dynamic rendering).
 const csp = [
   "default-src 'self'",
@@ -46,6 +58,12 @@ const nextConfig: NextConfig = {
     deviceSizes: [360, 414, 640, 768, 1024, 1280, 1536, 1920],
     remotePatterns: [
       { protocol: "https", hostname: "i.ytimg.com" },
+      // Review-build-only licensed stock (fix.md §6.1) — each image's
+      // credit/licence URL is tracked in ImageRef.credit and
+      // ASSETS-NEEDED.md. Swapped for real/commissioned photography before
+      // any production launch (DECISIONS.md).
+      { protocol: "https", hostname: "images.unsplash.com" },
+      { protocol: "https", hostname: "images.pexels.com" },
       // future CMS media host goes here
     ],
   },
