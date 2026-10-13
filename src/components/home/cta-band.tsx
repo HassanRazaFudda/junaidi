@@ -12,7 +12,8 @@ import { cn } from "@/lib/cn";
 // fix.md §7: "[CTA BAND — ink + photo] 'Talk to our Hajj & Umrah desk'
 // phone · WhatsApp · office hours." Office hours omitted — unconfirmed,
 // same reasoning as components/home/office.tsx. §6.2: "CTA band: Haram
-// night, heavily darkened." Photo credit: ASSETS-NEEDED.md.
+// night, heavily darkened." Same high-aerial-at-night photo as the hero
+// (no identifiable individual — DECISIONS.md). Credit: ASSETS-NEEDED.md.
 export async function CtaBand() {
   const [t, site] = await Promise.all([getTranslations(), getSiteSettings()]);
 
@@ -20,7 +21,7 @@ export async function CtaBand() {
     <Section className="relative overflow-hidden bg-ink text-marble">
       <div className="absolute inset-0 -z-10">
         <Image
-          src="https://images.unsplash.com/photo-1778567090660-6becd8b28312?q=80&w=1600&auto=format&fit=crop"
+          src="https://images.pexels.com/photos/36954370/pexels-photo-36954370/free-photo-of-aerial-view-of-mecca-s-grand-mosque-at-night.jpeg?auto=compress&cs=tinysrgb&w=1600"
           alt=""
           fill
           sizes="100vw"

@@ -55,11 +55,15 @@ export async function PackageCard({
       <div className="flex flex-1 flex-col p-5">
         <h3 className="text-h3 font-medium">{title}</h3>
 
-        <dl className="mt-2 space-y-1 text-meta text-stone">
+        <ul className="mt-2 space-y-1 text-meta text-stone">
           {pkg.hotels.map((hotel) => (
-            <div key={`${hotel.city}-${hotel.name}`} className="flex items-center gap-1.5">
+            <li key={`${hotel.city}-${hotel.name}`} className="flex items-center gap-1.5">
               {hotel.stars && (
-                <span className="flex items-center text-star" aria-label={`${hotel.stars} stars`}>
+                <span
+                  role="img"
+                  aria-label={`${hotel.stars} stars`}
+                  className="flex items-center text-star"
+                >
                   {Array.from({ length: hotel.stars }).map((_, i) => (
                     <Star key={i} className="size-3" fill="currentColor" aria-hidden />
                   ))}
@@ -69,9 +73,9 @@ export async function PackageCard({
                 {hotel.city} — {hotel.name}
                 {hotel.distanceMeters && ` · ${hotel.distanceMeters}m`}
               </span>
-            </div>
+            </li>
           ))}
-        </dl>
+        </ul>
 
         {pkg.included.length > 0 && (
           <ul className="mt-3 flex flex-wrap gap-x-3 gap-y-1 text-meta text-stone">

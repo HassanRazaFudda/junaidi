@@ -17,6 +17,8 @@
 
 # dev-only visual review screenshots (scripts/screenshot.mjs)
 /scripts/shots
+# dev-only Lighthouse run output (Step 8 verification, throwaway)
+/scripts/lighthouse-tmp
 
 # next.js
 /.next/

@@ -14,9 +14,12 @@ import type { Locale } from "@/i18n/routing";
 
 // fix.md §2/§3.2/§7: full-bleed photo hero, 92vh desktop / 80svh mobile,
 // ink gradient overlay, Talbiyah in Amiri, H1, subhead, 3 CTAs, and the
-// inquiry bar overlapping the hero's bottom edge on desktop. Photo credit:
-// ASSETS-NEEDED.md (Ben Latif / Unsplash — review-build-only licensed
-// stock, DECISIONS.md's imagery exception).
+// inquiry bar overlapping the hero's bottom edge on desktop. Photo is a
+// high aerial of the Haram at night — scale/atmosphere without showing any
+// identifiable individual (crowd reads as texture at this height/distance,
+// not faces); a close-up crowd photo the user asked for was declined for
+// exactly that reason — see DECISIONS.md. Credit: ASSETS-NEEDED.md
+// (arjan carja / Pexels — review-build-only licensed stock).
 //
 // data-hero / .hero-bg / .hero-overlay-scroll / .hero-talbiyah / .hero-h1 /
 // .hero-sub / .hero-actions / .hero-inquiry are hooks for
@@ -36,10 +39,11 @@ export async function Hero({ locale, whatsappNumber }: { locale: Locale; whatsap
         <div className="absolute inset-0 -z-10">
           <div className="hero-bg absolute inset-0">
             <Image
-              src="https://images.unsplash.com/photo-1778567090660-6becd8b28312?q=80&w=1920&auto=format&fit=crop"
+              src="https://images.pexels.com/photos/36954370/pexels-photo-36954370/free-photo-of-aerial-view-of-mecca-s-grand-mosque-at-night.jpeg?auto=compress&cs=tinysrgb&w=1920"
               alt=""
               fill
-              priority
+              loading="eager"
+              fetchPriority="high"
               sizes="100vw"
               className="object-cover"
             />
@@ -53,7 +57,7 @@ export async function Hero({ locale, whatsappNumber }: { locale: Locale; whatsap
           <div className="hero-overlay-scroll absolute inset-0 bg-ink" />
         </div>
 
-        <Container className="flex min-h-[80svh] flex-col justify-end gap-5 pt-28 pb-16 lg:min-h-[92vh] lg:pb-28">
+        <Container className="flex min-h-[80svh] flex-col justify-end gap-5 pt-20 pb-16 lg:min-h-[78vh] lg:pb-28">
           <p dir="rtl" lang="ar" className="hero-talbiyah font-arabic text-[28px] text-paper/80">
             لَبَّيْكَ اللَّهُمَّ لَبَّيْكَ
           </p>

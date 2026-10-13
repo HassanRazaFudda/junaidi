@@ -51,6 +51,7 @@ export async function Hotels() {
                 <p className="mt-1 font-medium">{hotel.name}</p>
                 {hotel.stars && (
                   <span
+                    role="img"
                     className="mt-1 flex items-center text-star"
                     aria-label={`${hotel.stars} stars`}
                   >
