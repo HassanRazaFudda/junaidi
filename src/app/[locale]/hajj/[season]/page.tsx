@@ -6,6 +6,7 @@ import { Section } from "@/components/ui/section";
 import { PackageRow } from "@/components/package/package-row";
 import { BookingSteps } from "@/components/package/booking-steps";
 import { Faq } from "@/components/package/faq";
+import { HajjStepper } from "@/components/route/hajj-stepper";
 import { PastGroups } from "@/components/home/past-groups";
 import { WhatsAppIcon } from "@/components/ui/whatsapp-icon";
 import { buttonStyles } from "@/components/ui/button";
@@ -103,6 +104,8 @@ export default async function HajjSeasonPage({
           </Container>
         </Section>
       )}
+
+      <HajjStepper />
 
       <PastGroups locale={locale as Locale} />
 

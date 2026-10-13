@@ -11,7 +11,7 @@
  */
 @theme {
   --color-crimson: #a00c20;
-  --color-crimson-night: #d2404f; /* the route line / pins on the ink night-state only */
+  --color-crimson-night: #d2404f; /* small accents on dark/ink sections only — fix.md §3.3 */
   --color-ink: #111726;
   --color-marble: #eceeea;
   --color-paper: #ffffff;
@@ -28,10 +28,6 @@
   --color-whatsapp: #25d366;
   --color-whatsapp-ink: #0b3d2e;
   --color-star: #e0a526;
-
-  /* route section state (animated by the GSAP enhancer, code.md §11.3) */
-  --color-route-bg: var(--color-marble);
-  --color-route-ink: var(--color-ink);
 
   --radius-control: 10px; /* buttons, inputs — fix.md §3.5 (was 6px in v2) */
   --radius-panel: 14px; /* drawers, lightbox */
@@ -86,8 +82,6 @@
 
 @layer base {
   :root {
-    --route-bg: var(--color-marble);
-    --route-ink: var(--color-ink);
     color-scheme: light;
   }
   html {
@@ -161,44 +155,6 @@ dialog[open]::backdrop {
   dialog[open]::backdrop {
     background-color: rgb(17 23 38 / 0);
   }
-}
-
-/*
- * The Manasik route's two layouts (code.md §11.3). Default: everything in
- * normal document flow — map above, stops stacked below, fully readable
- * with JS off or reduced motion. Once the GSAP enhancer sets
- * data-enhanced="true" (desktop + motion allowed only), this switches to a
- * pinned two-column stage where panels overlap in the same grid cell so
- * GSAP can cross-fade between them as ScrollTrigger scrubs the timeline.
- */
-.route-panel {
-  opacity: 1;
-  transform: none;
-}
-
-[data-route][data-enhanced="true"] .route-stage {
-  display: grid;
-  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
-  align-items: center;
-  gap: var(--spacing-s7);
-  min-height: 100vh;
-}
-[data-route][data-enhanced="true"] .route-map-wrap {
-  position: sticky;
-  top: 0;
-}
-[data-route][data-enhanced="true"] .route-panels {
-  display: grid;
-}
-[data-route][data-enhanced="true"] .route-panel {
-  grid-area: 1 / 1;
-  opacity: 0;
-  transform: translateY(12px);
-  padding: 0;
-}
-[data-route][data-enhanced="true"] .route-panel:first-child {
-  opacity: 1;
-  transform: none;
 }
 
 /*

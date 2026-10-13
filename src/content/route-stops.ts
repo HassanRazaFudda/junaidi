@@ -2,11 +2,12 @@
 // structural/ritual content tied to the design, not a CMS-swappable
 // business entity like a Package or Season, so it doesn't go through the
 // content repository — but every "what you do" line is still flagged for
-// scholar review before publication (design.md §7.3, guide.md §6), and
-// "what our team does" is deliberately NOT written per-stop here: it has
-// to come from a confirmed package (guide.md §5.1 row 5), and none exists
-// yet (DECISIONS.md #5) — route/manasik-route.tsx renders one shared
-// pending notice instead of per-stop invented operational detail.
+// scholar review before publication (design.md §7.3, guide.md §6). "What
+// our team does" is deliberately NOT written per-stop here: it has to come
+// from a confirmed package (guide.md §5.1 row 5), and none exists yet
+// (DECISIONS.md #5). Rendered as a compact stepper on /hajj/[season] —
+// route/hajj-stepper.tsx (fix.md §11 step 7) — not the original pinned
+// home-page layout these stops were first written for.
 export type RouteStop = {
   id: string;
   dateLabel: string;

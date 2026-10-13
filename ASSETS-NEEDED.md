@@ -40,10 +40,9 @@ Two more photos were sourced (verified free, credited) but ended up **not placed
 - **O-01 office photo** — `components/home/office.tsx` was deleted when the v3 home page order (fix.md §7) dropped the standalone Office section: the office address is still real, confirmed content, shown via the Trust strip badge on home and the full address + map placeholder on `/contact`. If a future pass wants the fuller Office block back, it's in git history.
 - **contact-map** (not a design.md-numbered asset) — a map/pin for the office location on `/contact`; currently a placeholder block.
 
-## The route (design.md §10.2)
+## The route (design.md §10.2) — superseded by fix.md §11 step 7
 
-- **R-01 base map** — built, but as a schematic stand-in (`src/components/route/route-map.tsx`): an abstract flowing path through the 8 stops, not a traced geographic map. design.md specifies this as hand-traced from real OpenStreetMap shapes by a designer, which this agent can't faithfully do without GIS tooling or a human design pass — so it deliberately carries no OpenStreetMap attribution (that would misstate its source). Needs a real designer pass; IDs (`#seg-{id}`, `#pin-{id}`) already match design.md's convention so swapping the markup won't touch the Checkpoint 3 GSAP enhancer.
-- R-03–R-09 stop media, R-02/R-10 optional AI atmosphere layers (category C, fine to generate if used) — not built yet; each stop currently renders the `PlaceholderMedia` block.
+design.md §10.2's R-01–R-10 asset slots (base map, per-stop photos, AI atmosphere layers) were all scoped to the original pinned, map-driven home-page route (`components/route/manasik-route.tsx`, `route-map.tsx`), which fix.md §3.2/§9.1 removed entirely — it's not coming back. That route's content is now a compact, text-only horizontal stepper on `/hajj/[season]` (`components/route/hajj-stepper.tsx`, fix.md §11 step 7) with no map and no per-stop imagery at all, so none of these asset slots apply any more. If a future pass wants per-stop photography on the stepper, that would be new asset planning against the current design, not a resumption of design.md §10.2's old spec.
 
 ## Hajj 2027 / package detail (design.md §10.3)
 

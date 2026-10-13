@@ -4,20 +4,30 @@ test.use({ reducedMotion: "reduce" });
 
 // code.md §16: "Route section readable and complete; no hidden content."
 test.describe("Reduced motion", () => {
-  // fix.md §3.2/§9.1 removed the pinned route from home — it's rebuilt as
-  // a non-pinned stepper on /hajj/2027 in fix.md §11 step 7. Re-enable this
-  // test, pointed at that page, once that step lands.
-  test.skip("the route section shows every stop, not pinned or cross-faded", async ({ page }) => {
-    await page.goto("/");
-    const route = page.locator("[data-route]");
-    await route.scrollIntoViewIfNeeded();
+  // fix.md §3.2/§9.1 removed the pinned route from home — fix.md §11 step 7
+  // rebuilt it as a non-pinned stepper on /hajj/2027 (hajj-stepper.tsx).
+  test("the Hajj stepper shows every stop, with no scroll-linked colour animation engaged", async ({
+    page,
+  }) => {
+    await page.goto("/hajj/2027");
+    const stepper = page.locator("[data-hajj-stepper]");
+    await stepper.scrollIntoViewIfNeeded();
+    await page.waitForTimeout(300);
 
-    // The GSAP enhancer must never engage under reduced motion — no
-    // data-enhanced attribute, no stop hidden via the pinned cross-fade
-    // layout.
-    await expect(route).not.toHaveAttribute("data-enhanced", "true");
+    // The GSAP enhancer must never engage under reduced motion — the fill
+    // line stays at its SSR width (0), and no dot ever lights up.
+    const fillWidth = await page
+      .locator(".hajj-stepper-fill")
+      .evaluate((el) => getComputedStyle(el).width);
+    expect(fillWidth).toBe("0px");
 
-    const stopPlaces = ["Makkah", "Mina", "Arafat", "Muzdalifah", "Madinah"];
+    const stopPlaces = [
+      "Mina",
+      "Arafat",
+      "Muzdalifah",
+      "Jamarat, sacrifice, Tawaf al-Ifadah",
+      "Farewell Tawaf",
+    ];
     for (const place of stopPlaces) {
       await expect(page.getByRole("heading", { name: place, exact: true })).toBeVisible();
     }
