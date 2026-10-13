@@ -1,4 +1,5 @@
 import { getTranslations, getLocale } from "next-intl/server";
+import { FacebookIcon } from "@/components/ui/facebook-icon";
 import { Link } from "@/i18n/navigation";
 import { Container } from "@/components/ui/container";
 import { getSiteSettings, listCredentials } from "@/content/queries";
@@ -13,6 +14,14 @@ const policyLinks = [
   { href: "/complaints", key: "complaints" },
 ] as const;
 
+// fix.md §7: "services links · Hajj/Umrah links." Only real, live routes
+// (DECISIONS.md #5e) — Umrah/Flights/Visas pages don't exist in Phase 1.
+const serviceLinks = [
+  { href: "/hajj/2027", label: "Hajj 2027" },
+  { href: "/hajj/how-private-hajj-booking-works", label: "How booking works" },
+  { href: "/contact", label: "Contact" },
+] as const;
+
 export async function Footer() {
   const [t, locale, site, credentials, year] = await Promise.all([
     getTranslations("footer"),
@@ -24,7 +33,7 @@ export async function Footer() {
 
   return (
     <footer className="border-t border-line bg-marble">
-      <Container className="grid gap-10 py-12 text-small md:grid-cols-3">
+      <Container className="grid gap-10 py-12 text-small md:grid-cols-4">
         <div>
           <p className="font-display text-h3">{site.brandName}</p>
           <p className="mt-1 text-stone">{site.legalName}</p>
@@ -42,6 +51,30 @@ export async function Footer() {
               {site.landline}
             </a>
           </p>
+          {site.facebookUrl && (
+            <a
+              href={site.facebookUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="mt-3 inline-flex items-center gap-2 text-stone hover:text-crimson"
+            >
+              <FacebookIcon className="size-5" />
+              <span className="sr-only">Facebook</span>
+            </a>
+          )}
+        </div>
+
+        <div>
+          <h2 className="font-medium">{t("servicesHeading")}</h2>
+          <ul className="mt-2 space-y-2">
+            {serviceLinks.map((l) => (
+              <li key={l.href}>
+                <Link href={l.href} className="text-stone hover:text-crimson">
+                  {l.label}
+                </Link>
+              </li>
+            ))}
+          </ul>
         </div>
 
         <div>

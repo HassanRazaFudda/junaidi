@@ -34,6 +34,7 @@
   },
   "footer": {
     "officeHeading": "Office",
+    "servicesHeading": "Services",
     "credentialsHeading": "Licensed and registered",
     "policiesHeading": "Policies",
     "privacy": "Privacy",
@@ -77,9 +78,13 @@
   },
   "packages": {
     "heading": "Hajj 2027 packages",
+    "umrahHeading": "Umrah packages",
+    "umrahEyebrow": "Umrah packages",
+    "umrahSubheading": "Choose your month",
     "compare": "Compare packages",
     "filterShort": "Short",
     "filterLong": "Long",
+    "filterAll": "All",
     "view": "View",
     "priceChecked": "Price checked on",
     "soldOut": "Sold out",
@@ -87,7 +92,10 @@
     "emptyHeading": "Packages are being finalised",
     "emptyBody": "Hajj 2027 package details (hotels, pricing, inclusions) are being confirmed with the client. Message our Hajj desk for the latest.",
     "howToBook": "How to book this package",
-    "whatsappAboutPackage": "WhatsApp us about this package"
+    "whatsappAboutPackage": "WhatsApp us about this package",
+    "nights": "nights",
+    "from": "From",
+    "seeAllUmrah": "See all Umrah packages"
   },
   "pastGroups": {
     "heading": "Past groups"
@@ -136,5 +144,33 @@
   "pendingPage": {
     "heading": "Being finalised",
     "body": "This page is being prepared with the client's legal counsel and will be published before launch."
+  },
+  "inquiryBar": {
+    "service": "Service",
+    "month": "Month",
+    "travellers": "Travellers",
+    "whatsappNumber": "Your WhatsApp number",
+    "getQuote": "Get a quote",
+    "sending": "Sending",
+    "sent": "Sent — we'll reply on WhatsApp",
+    "errorHeading": "Please check the form"
+  },
+  "trustStrip": {
+    "heading": "Checked credentials",
+    "officeItem": "Office at Mona Square, Karachi"
+  },
+  "whyJunaidi": {
+    "heading": "Why Junaidi",
+    "eyebrow": "Why choose us"
+  },
+  "hotels": {
+    "heading": "Where you'll stay",
+    "eyebrow": "Hotels",
+    "tabMakkah": "Makkah",
+    "tabMadinah": "Madinah"
+  },
+  "ctaBand": {
+    "heading": "Talk to our Hajj & Umrah desk",
+    "body": "Message us on WhatsApp or call during office hours — we reply within 2 office hours."
   }
 }

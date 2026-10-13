@@ -6,7 +6,11 @@ import { Resend } from "resend";
 import { env } from "@/lib/env";
 
 const Inquiry = z.object({
-  name: z.string().trim().min(2).max(80),
+  // Optional: fix.md §4.2's quick inquiry bar (service/month/travellers/
+  // WhatsApp number only, no name field) reuses this same action — the
+  // full contact-form page still requires a name via its own required
+  // field attribute, this just lets the schema accept either submitter.
+  name: z.string().trim().min(2).max(80).optional(),
   phone: z
     .string()
     .trim()
@@ -40,7 +44,7 @@ export async function submitInquiry(
     const { error } = await resend.emails.send({
       from: env.INQUIRY_FROM_EMAIL,
       to: env.INQUIRY_TO_EMAIL,
-      subject: `New ${parsed.data.service} inquiry — ${parsed.data.name}`,
+      subject: `New ${parsed.data.service} inquiry — ${parsed.data.name ?? "quick inquiry bar"}`,
       text: JSON.stringify(parsed.data, null, 2),
     });
     if (error) throw error;
