@@ -3,6 +3,8 @@ import { getTranslations } from "next-intl/server";
 import { Section } from "@/components/ui/section";
 import { Container } from "@/components/ui/container";
 import { WhatsAppIcon } from "@/components/ui/whatsapp-icon";
+import { Reveal } from "@/components/ui/reveal.client";
+import { StaggerGrid } from "@/components/ui/stagger-grid.client";
 import { getSiteSettings } from "@/content/queries";
 import { whatsappUrl } from "@/lib/whatsapp";
 
@@ -51,11 +53,15 @@ export async function ServicesCards() {
   return (
     <Section>
       <Container>
-        <p className="text-caption font-medium text-crimson">{t("eyebrow")}</p>
-        <h2 className="font-display mt-1 text-h2">{t("heading")}</h2>
-        <ul className="mt-8 grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
-          {cards.map((card) => (
-            <li key={card.key}>
+        <Reveal>
+          <p className="text-caption font-medium text-crimson">{t("eyebrow")}</p>
+          <h2 className="font-display mt-1 text-h2">{t("heading")}</h2>
+        </Reveal>
+        <StaggerGrid
+          className="mt-8 grid gap-6 sm:grid-cols-2 lg:grid-cols-4"
+          items={cards.map((card) => ({
+            id: card.key,
+            node: (
               <a
                 href={whatsappUrl(site.whatsappNumber, { topic: t(`${card.key}.topic`) })}
                 target="_blank"
@@ -68,7 +74,7 @@ export async function ServicesCards() {
                     alt=""
                     fill
                     sizes="(min-width: 1024px) 300px, 90vw"
-                    className="object-cover transition-transform duration-300 group-hover:scale-105"
+                    className="object-cover transition-transform duration-300 group-hover:scale-[1.04]"
                   />
                 </div>
                 <div className="flex items-center justify-between gap-2 p-4">
@@ -76,9 +82,9 @@ export async function ServicesCards() {
                   <WhatsAppIcon className="size-4 shrink-0 text-whatsapp-ink/70" />
                 </div>
               </a>
-            </li>
-          ))}
-        </ul>
+            ),
+          }))}
+        />
       </Container>
     </Section>
   );

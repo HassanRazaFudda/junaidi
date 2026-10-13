@@ -2,6 +2,8 @@ import { getTranslations } from "next-intl/server";
 import { Star } from "lucide-react";
 import { Section } from "@/components/ui/section";
 import { Container } from "@/components/ui/container";
+import { Reveal } from "@/components/ui/reveal.client";
+import { StaggerGrid } from "@/components/ui/stagger-grid.client";
 import { listPackages } from "@/content/queries";
 import type { Hotel } from "@/content/types";
 
@@ -35,32 +37,37 @@ export async function Hotels() {
   return (
     <Section className="border-t border-line">
       <Container>
-        <p className="text-caption font-medium text-crimson">{t("eyebrow")}</p>
-        <h2 className="font-display mt-1 text-h2">{t("heading")}</h2>
-        <ul className="mt-8 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
-          {hotels.map((hotel) => (
-            <li
-              key={`${hotel.city}-${hotel.name}`}
-              className="card-hover rounded-card border border-line bg-paper p-4"
-            >
-              <p className="text-caption text-stone">{hotel.city}</p>
-              <p className="mt-1 font-medium">{hotel.name}</p>
-              {hotel.stars && (
-                <span
-                  className="mt-1 flex items-center text-star"
-                  aria-label={`${hotel.stars} stars`}
-                >
-                  {Array.from({ length: hotel.stars }).map((_, i) => (
-                    <Star key={i} className="size-3.5" fill="currentColor" aria-hidden />
-                  ))}
-                </span>
-              )}
-              {hotel.distanceMeters && (
-                <p className="mt-1 text-meta text-stone">{hotel.distanceMeters}m from the Haram</p>
-              )}
-            </li>
-          ))}
-        </ul>
+        <Reveal>
+          <p className="text-caption font-medium text-crimson">{t("eyebrow")}</p>
+          <h2 className="font-display mt-1 text-h2">{t("heading")}</h2>
+        </Reveal>
+        <StaggerGrid
+          className="mt-8 grid gap-4 sm:grid-cols-2 lg:grid-cols-4"
+          items={hotels.map((hotel) => ({
+            id: `${hotel.city}-${hotel.name}`,
+            node: (
+              <div className="card-hover rounded-card border border-line bg-paper p-4">
+                <p className="text-caption text-stone">{hotel.city}</p>
+                <p className="mt-1 font-medium">{hotel.name}</p>
+                {hotel.stars && (
+                  <span
+                    className="mt-1 flex items-center text-star"
+                    aria-label={`${hotel.stars} stars`}
+                  >
+                    {Array.from({ length: hotel.stars }).map((_, i) => (
+                      <Star key={i} className="size-3.5" fill="currentColor" aria-hidden />
+                    ))}
+                  </span>
+                )}
+                {hotel.distanceMeters && (
+                  <p className="mt-1 text-meta text-stone">
+                    {hotel.distanceMeters}m from the Haram
+                  </p>
+                )}
+              </div>
+            ),
+          }))}
+        />
       </Container>
     </Section>
   );

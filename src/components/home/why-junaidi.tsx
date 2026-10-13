@@ -3,6 +3,8 @@ import { Users, GraduationCap, Tent, Headset, Building2, MapPin } from "lucide-r
 import { Section } from "@/components/ui/section";
 import { Container } from "@/components/ui/container";
 import { SampleBadge } from "@/components/ui/sample-badge";
+import { Reveal } from "@/components/ui/reveal.client";
+import { StaggerGrid } from "@/components/ui/stagger-grid.client";
 import { env } from "@/lib/env";
 
 // fix.md §4.4: 6 points, "Draft points to confirm with the client" — by
@@ -52,17 +54,23 @@ export async function WhyJunaidi() {
   return (
     <Section className="border-t border-line">
       <Container>
-        <p className="text-caption font-medium text-crimson">{t("eyebrow")}</p>
-        <h2 className="font-display mt-1 text-h2">{t("heading")}</h2>
-        <ul className="mt-8 grid gap-8 sm:grid-cols-2 lg:grid-cols-3">
-          {points.map(({ Icon, title, body }) => (
-            <li key={title}>
-              <Icon className="size-7 text-crimson" aria-hidden />
-              <p className="mt-3 font-medium">{title}</p>
-              <p className="mt-1 text-meta text-stone">{body}</p>
-            </li>
-          ))}
-        </ul>
+        <Reveal>
+          <p className="text-caption font-medium text-crimson">{t("eyebrow")}</p>
+          <h2 className="font-display mt-1 text-h2">{t("heading")}</h2>
+        </Reveal>
+        <StaggerGrid
+          className="mt-8 grid gap-8 sm:grid-cols-2 lg:grid-cols-3"
+          items={points.map(({ Icon, title, body }) => ({
+            id: title,
+            node: (
+              <div>
+                <Icon className="size-7 text-crimson" aria-hidden />
+                <p className="mt-3 font-medium">{title}</p>
+                <p className="mt-1 text-meta text-stone">{body}</p>
+              </div>
+            ),
+          }))}
+        />
         <SampleBadge className="mt-6" />
       </Container>
     </Section>

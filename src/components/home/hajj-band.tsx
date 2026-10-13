@@ -3,6 +3,9 @@ import { Section } from "@/components/ui/section";
 import { Container } from "@/components/ui/container";
 import { PackageCard } from "@/components/package/package-card";
 import { BookingSteps } from "@/components/package/booking-steps";
+import { Reveal } from "@/components/ui/reveal.client";
+import { StaggerGrid } from "@/components/ui/stagger-grid.client";
+import { DeadlineCountdown } from "@/components/home/deadline-countdown.client";
 import { getSeason, getSeasonDeadlineStatus, listPackages } from "@/content/queries";
 import type { Locale } from "@/i18n/routing";
 
@@ -27,32 +30,36 @@ export async function HajjBand({
   if (!season || !deadlineStatus || packages.length === 0) return null;
 
   const tiers = packages.slice(0, 3);
+  // Animation-only starting point for the countdown's roll-down visual —
+  // derived from the real `days` value, not a separate invented date (see
+  // deadline-countdown.client.tsx).
+  const totalDays = Math.min(deadlineStatus.days * 3, 365);
 
   return (
     <Section className="pattern-star-ink bg-ink text-paper">
       <Container className="grid gap-10 lg:grid-cols-2 lg:items-center lg:gap-16">
-        <div>
+        <Reveal>
           <p className="text-caption font-medium text-crimson-night">{t("eyebrow")}</p>
           <h2 className="font-display mt-1 text-h2 text-paper">{t("heading")}</h2>
           {!deadlineStatus.closed && (
             <p className="mt-2 text-lead text-paper/85">
-              {deadlineStatus.days} day{deadlineStatus.days === 1 ? "" : "s"} left to book on the
-              Pak Hajj app.
+              <DeadlineCountdown days={deadlineStatus.days} totalDays={totalDays} /> day
+              {deadlineStatus.days === 1 ? "" : "s"} left to book on the Pak Hajj app.
             </p>
           )}
           <div className="mt-8">
             <BookingSteps portalUrl={season.officialPortalUrl} dark />
           </div>
           <p className="mt-6 text-meta text-paper/60">{t("note")}</p>
-        </div>
+        </Reveal>
 
-        <ul className="grid gap-6">
-          {tiers.map((pkg) => (
-            <li key={pkg.id}>
-              <PackageCard pkg={pkg} locale={locale} whatsappNumber={whatsappNumber} />
-            </li>
-          ))}
-        </ul>
+        <StaggerGrid
+          className="grid gap-6"
+          items={tiers.map((pkg) => ({
+            id: pkg.id,
+            node: <PackageCard pkg={pkg} locale={locale} whatsappNumber={whatsappNumber} />,
+          }))}
+        />
       </Container>
     </Section>
   );

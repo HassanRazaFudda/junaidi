@@ -2,6 +2,8 @@ import { getTranslations } from "next-intl/server";
 import { Section } from "@/components/ui/section";
 import { Container } from "@/components/ui/container";
 import { YoutubeFacade } from "@/components/media/youtube-facade.client";
+import { Reveal } from "@/components/ui/reveal.client";
+import { PastGroupsCarousel } from "@/components/home/past-groups-carousel.client";
 import { listVideos } from "@/content/queries";
 import { pick } from "@/content/localize";
 import type { Locale } from "@/i18n/routing";
@@ -16,17 +18,21 @@ export async function PastGroups({ locale }: { locale: Locale }) {
   return (
     <Section className="border-t border-line">
       <Container>
-        <h2 className="font-display text-h2">{t("heading")}</h2>
-        <div className="mt-6 flex snap-x gap-4 overflow-x-auto pb-2">
-          {videos.map((v) => (
-            <YoutubeFacade
-              key={v.youtubeId}
-              youtubeId={v.youtubeId}
-              title={pick(v.title, locale)}
-              seasonLabel={v.seasonLabel}
-            />
-          ))}
-        </div>
+        <Reveal>
+          <h2 className="font-display text-h2">{t("heading")}</h2>
+        </Reveal>
+        <PastGroupsCarousel
+          items={videos.map((v) => ({
+            id: v.youtubeId,
+            node: (
+              <YoutubeFacade
+                youtubeId={v.youtubeId}
+                title={pick(v.title, locale)}
+                seasonLabel={v.seasonLabel}
+              />
+            ),
+          }))}
+        />
       </Container>
     </Section>
   );

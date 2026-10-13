@@ -3,6 +3,7 @@ import { Section } from "@/components/ui/section";
 import { Container } from "@/components/ui/container";
 import { PackageCard } from "@/components/package/package-card";
 import { UmrahPackagesFilter } from "@/components/home/umrah-packages-filter.client";
+import { Reveal } from "@/components/ui/reveal.client";
 import { Link } from "@/i18n/navigation";
 import { listPackages } from "@/content/queries";
 import { pick } from "@/content/localize";
@@ -45,15 +46,17 @@ export async function UmrahPackages({
   return (
     <Section noPaddingTop={noPaddingTop}>
       <Container>
-        <p className="text-caption font-medium text-crimson">{t("umrahEyebrow")}</p>
-        <div className="mt-1 flex flex-wrap items-end justify-between gap-4">
-          <h2 className="font-display text-h2">{t("umrahSubheading")}</h2>
-          {seeAllLink && (
-            <Link href="/umrah" className="text-small font-medium hover:text-crimson">
-              {t("seeAllUmrah")}
-            </Link>
-          )}
-        </div>
+        <Reveal>
+          <p className="text-caption font-medium text-crimson">{t("umrahEyebrow")}</p>
+          <div className="mt-1 flex flex-wrap items-end justify-between gap-4">
+            <h2 className="font-display text-h2">{t("umrahSubheading")}</h2>
+            {seeAllLink && (
+              <Link href="/umrah" className="text-small font-medium hover:text-crimson">
+                {t("seeAllUmrah")}
+              </Link>
+            )}
+          </div>
+        </Reveal>
         <UmrahPackagesFilter items={items} allLabel={t("filterAll")} />
       </Container>
     </Section>

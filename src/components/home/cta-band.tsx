@@ -4,6 +4,7 @@ import { Section } from "@/components/ui/section";
 import { Container } from "@/components/ui/container";
 import { WhatsAppIcon } from "@/components/ui/whatsapp-icon";
 import { buttonStyles } from "@/components/ui/button";
+import { Reveal } from "@/components/ui/reveal.client";
 import { getSiteSettings } from "@/content/queries";
 import { whatsappUrl } from "@/lib/whatsapp";
 import { cn } from "@/lib/cn";
@@ -28,8 +29,10 @@ export async function CtaBand() {
         <div className="absolute inset-0 bg-ink/70" />
       </div>
       <Container className="text-center">
-        <h2 className="font-display text-h2">{t("ctaBand.heading")}</h2>
-        <p className="mt-2 text-lead text-marble/80">{t("ctaBand.body")}</p>
+        <Reveal>
+          <h2 className="font-display text-h2">{t("ctaBand.heading")}</h2>
+          <p className="mt-2 text-lead text-marble/80">{t("ctaBand.body")}</p>
+        </Reveal>
         <div className="mt-6 flex flex-wrap items-center justify-center gap-4">
           <a
             href={whatsappUrl(site.whatsappNumber, {})}

@@ -2,6 +2,7 @@ import { Section } from "@/components/ui/section";
 import { Container } from "@/components/ui/container";
 import { Accordion } from "@/components/ui/accordion.client";
 import { SampleBadge } from "@/components/ui/sample-badge";
+import { Reveal } from "@/components/ui/reveal.client";
 import { env } from "@/lib/env";
 
 // fix.md §2/§7: "FAQ — marble, 6 questions, two-column on desktop." Same
@@ -49,8 +50,10 @@ export function SiteFaq() {
   return (
     <Section className="border-t border-line">
       <Container>
-        <p className="text-caption font-medium text-crimson">FAQ</p>
-        <h2 className="font-display mt-1 text-h2">Frequently asked questions</h2>
+        <Reveal>
+          <p className="text-caption font-medium text-crimson">FAQ</p>
+          <h2 className="font-display mt-1 text-h2">Frequently asked questions</h2>
+        </Reveal>
         <div className="mt-8 grid gap-x-10 lg:grid-cols-2">
           <Accordion items={left} />
           <Accordion items={right} />
