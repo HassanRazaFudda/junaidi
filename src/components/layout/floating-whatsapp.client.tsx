@@ -28,7 +28,7 @@ export function FloatingWhatsApp({ whatsappNumber }: { whatsappNumber: string })
       initial={{ scale: 0, opacity: 0 }}
       animate={show ? { scale: 1, opacity: 1 } : {}}
       transition={{ duration: 0.3, ease: [0.22, 1, 0.36, 1] }}
-      className="fixed end-6 bottom-6 z-30 hidden min-h-12 items-center gap-2 rounded-full bg-[#25D366] px-4 text-[#0B3D2E] shadow-[0_18px_40px_-18px_rgba(17,23,38,0.35)] md:inline-flex"
+      className="fixed end-6 bottom-6 z-30 hidden min-h-12 items-center gap-2 rounded-full bg-whatsapp px-4 text-whatsapp-ink shadow-[0_18px_40px_-18px_rgba(17,23,38,0.35)] md:inline-flex"
     >
       <WhatsAppIcon className="size-6" />
       <span className="font-medium">{t("chatWithUs")}</span>

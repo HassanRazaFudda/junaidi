@@ -52,7 +52,7 @@ export async function Hero({ locale, whatsappNumber }: { locale: Locale; whatsap
             target="_blank"
             rel="noopener noreferrer"
             className={cn(
-              buttonStyles.secondary,
+              buttonStyles.whatsapp,
               "inline-flex min-h-12 items-center gap-2 rounded-control px-5",
             )}
           >

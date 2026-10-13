@@ -9,6 +9,7 @@ import { useScroll, useMotionValueEvent } from "motion/react";
 import { Link } from "@/i18n/navigation";
 import { Container } from "@/components/ui/container";
 import { WhatsAppIcon } from "@/components/ui/whatsapp-icon";
+import { buttonStyles } from "@/components/ui/button";
 import { whatsappUrl } from "@/lib/whatsapp";
 import { cn } from "@/lib/cn";
 
@@ -81,7 +82,10 @@ export function HeaderClient({
             href={whatsappUrl(whatsappNumber, {})}
             target="_blank"
             rel="noopener noreferrer"
-            className="hidden min-h-11 items-center gap-2 rounded-control border border-line px-4 text-small font-medium md:inline-flex"
+            className={cn(
+              buttonStyles.whatsapp,
+              "hidden min-h-11 items-center gap-2 rounded-control px-4 text-small font-medium md:inline-flex",
+            )}
           >
             <WhatsAppIcon className="size-5" />
             {t("header.whatsappCta")}
@@ -120,7 +124,10 @@ export function HeaderClient({
             href={whatsappUrl(whatsappNumber, {})}
             target="_blank"
             rel="noopener noreferrer"
-            className="mt-2 inline-flex min-h-11 items-center gap-2 rounded-control border border-line px-4 text-small font-medium"
+            className={cn(
+              buttonStyles.whatsapp,
+              "mt-2 inline-flex min-h-11 items-center gap-2 rounded-control px-4 text-small font-medium",
+            )}
           >
             <WhatsAppIcon className="size-5" />
             {t("header.whatsappCta")}

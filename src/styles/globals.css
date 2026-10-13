@@ -1,13 +1,13 @@
 @import "tailwindcss";
 
 /*
- * Design tokens. Source: design.md §4, with the colour/type reconciliation
- * recorded in DECISIONS.md #1 — design.md's "brass"/"night"/Marcellus+Hanken
- * Grotesk system is superseded by code.md §5.1's actual crimson/ink/Archivo
- * tokens, which match the brief's own "Known facts" (#A00C20, #111726) and
- * Definition of Done ("one crimson line motif, Archivo"). Spacing, radius,
- * and the type *scale* (sizes/line-heights) are unchanged from design.md —
- * those numbers already match code.md exactly.
+ * Design tokens. v3 (fix.md §3), which explicitly replaces design.md
+ * §2.1/§2.5/§3/§5/§7.2/§10 after client feedback that v2's calm-editorial
+ * approach read as empty rather than premium for this niche. Colour family
+ * (crimson/ink/marble/paper/haze/stone) carries over from v2 unchanged
+ * (fix.md §3.1 "what stays"); spacing, radius and the type scale are
+ * denser per fix.md §3.2/§3.4/§3.5. See DECISIONS.md #1 for the earlier
+ * v1→v2 brass/night→crimson/ink reconciliation this builds on.
  */
 @theme {
   --color-crimson: #a00c20;
@@ -21,12 +21,21 @@
   --color-alert: #a23b2a;
   --color-line: rgb(17 23 38 / 0.14);
 
+  /* fix.md §3.3: WhatsApp's own green, recognised instantly — used only on
+   * the WhatsApp button itself (icon already used its own green; now the
+   * fill does too), never as a general accent. Star amber is for hotel
+   * ratings only, never anywhere else (fix.md §3.3). */
+  --color-whatsapp: #25d366;
+  --color-whatsapp-ink: #0b3d2e;
+  --color-star: #e0a526;
+
   /* route section state (animated by the GSAP enhancer, code.md §11.3) */
   --color-route-bg: var(--color-marble);
   --color-route-ink: var(--color-ink);
 
-  --radius-control: 6px; /* buttons, inputs */
+  --radius-control: 10px; /* buttons, inputs — fix.md §3.5 (was 6px in v2) */
   --radius-panel: 14px; /* drawers, lightbox */
+  --radius-card: 16px; /* fix.md §3.5: package/hotel/testimonial cards */
 
   --ease-out-quint: cubic-bezier(0.22, 1, 0.36, 1);
   --ease-in-out-cubic: cubic-bezier(0.65, 0, 0.35, 1);
@@ -36,7 +45,10 @@
   --duration-panel: 400ms;
   --duration-hero: 900ms;
 
-  /* 8pt spacing scale, design.md §4 */
+  /* 8pt spacing scale. s8/s9 are the v3 section rhythm (fix.md §3.2: "80px
+   * desktop / 56px mobile" — down from v2's 72/120, denser per-niche
+   * expectation), referenced directly by Section (not renamed, since
+   * nothing else keyed off the old 72/120 values specifically). */
   --spacing-s1: 4px;
   --spacing-s2: 8px;
   --spacing-s3: 12px;
@@ -44,18 +56,25 @@
   --spacing-s5: 24px;
   --spacing-s6: 32px;
   --spacing-s7: 48px;
-  --spacing-s8: 72px;
-  --spacing-s9: 120px;
+  --spacing-s8: 56px;
+  --spacing-s9: 80px;
 
-  /* type scale — identical in design.md §2.3 and code.md §5.1 */
-  --text-display: clamp(2.5rem, 1.2rem + 4.2vw, 4.5rem);
-  --text-h1: clamp(2.25rem, 1.4rem + 2.8vw, 3.75rem);
-  --text-h2: clamp(1.75rem, 1.3rem + 1.4vw, 2.25rem);
-  --text-h3: 1.5rem;
+  /* type scale, fix.md §3.4 (denser than v2's design.md §2.3 scale).
+   * --text-small stays general-purpose UI text (nav, footer, buttons —
+   * fix.md's table doesn't address this role, only "Card title" and
+   * "Meta"); --text-meta is the new, narrower 14px role fix.md specifies
+   * for package-card facts (nights, distance, stars) specifically, so
+   * adding it doesn't shrink unrelated UI text site-wide. */
+  --text-display: clamp(2.375rem, 1.6rem + 2.6vw, 4rem); /* Hero H1: 38px → 64px */
+  --text-h1: clamp(1.75rem, 1.2rem + 2vw, 3rem);
+  --text-h2: clamp(1.75rem, 1.4rem + 1.2vw, 2.5rem); /* Section H2: 28px → 40px */
+  --text-h3: clamp(1.125rem, 1rem + 0.4vw, 1.25rem); /* Card title: 18px → 20px */
   --text-lead: 1.3125rem;
-  --text-body: 1.125rem;
+  --text-body: clamp(1rem, 0.95rem + 0.2vw, 1.0625rem); /* Body: 16px → 17px */
   --text-small: 1rem;
-  --text-caption: 0.875rem;
+  --text-meta: 0.875rem; /* package-card meta: nights, distance, stars — 14px */
+  --text-caption: 0.875rem; /* eyebrow: 14px, sentence case, crimson */
+  --text-price: clamp(1.375rem, 1.3rem + 0.3vw, 1.5rem); /* Price: 22px → 24px */
 }
 
 /* Fonts come from next/font CSS variables; `inline` resolves them at use time */
@@ -93,6 +112,31 @@
     font-variation-settings: "wdth" 112;
     font-weight: 650;
     letter-spacing: -0.01em;
+  }
+}
+
+/*
+ * fix.md §3.5: "Cards: 16px radius, 1px --line border, hover lifts 4px
+ * with shadow 0 18px 40px -18px rgba(17,23,38,.35)." One reusable class so
+ * every card component (package, hotel, testimonial, trust badge) gets
+ * the same hover feel instead of repeating the shadow value. CSS
+ * transition, not Motion/GSAP — this is a plain hover affordance, not one
+ * of design.md §7.2's catalogued motion moments.
+ */
+@layer utilities {
+  .card-hover {
+    transition:
+      transform var(--duration-ui) var(--ease-out-quint),
+      box-shadow var(--duration-ui) var(--ease-out-quint);
+  }
+  .card-hover:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 18px 40px -18px rgb(17 23 38 / 0.35);
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .card-hover:hover {
+      transform: none;
+    }
   }
 }
 

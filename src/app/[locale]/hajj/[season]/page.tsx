@@ -115,7 +115,7 @@ export default async function HajjSeasonPage({
             target="_blank"
             rel="noopener noreferrer"
             className={cn(
-              buttonStyles.primary,
+              buttonStyles.whatsapp,
               "inline-flex min-h-12 items-center gap-2 rounded-control px-5",
             )}
           >

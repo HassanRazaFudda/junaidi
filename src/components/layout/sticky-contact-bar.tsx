@@ -17,7 +17,7 @@ export async function StickyContactBar() {
         rel="noopener noreferrer"
         className="flex min-h-12 items-center justify-center gap-2 border-e border-line py-3 text-small font-medium"
       >
-        <WhatsAppIcon className="size-5" />
+        <WhatsAppIcon className="size-5 text-whatsapp" />
         {t("whatsapp")}
       </a>
       <a
