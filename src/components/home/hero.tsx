@@ -51,7 +51,7 @@ export async function Hero({ locale, whatsappNumber }: { locale: Locale; whatsap
           />
         </div>
 
-        <Container className="flex min-h-[80svh] flex-col justify-end gap-5 pt-28 pb-16 lg:min-h-[92vh]">
+        <Container className="flex min-h-[80svh] flex-col justify-end gap-5 pt-28 pb-16 lg:min-h-[92vh] lg:pb-28">
           <p dir="rtl" lang="ar" className="font-arabic text-[28px] text-paper/80">
             لَبَّيْكَ اللَّهُمَّ لَبَّيْكَ
           </p>
@@ -98,9 +98,7 @@ export async function Hero({ locale, whatsappNumber }: { locale: Locale; whatsap
       </div>
 
       <Container className="relative z-10 py-10 lg:-mt-20 lg:py-0">
-        <div className="lg:max-w-3xl">
-          <InquiryBar />
-        </div>
+        <InquiryBar />
       </Container>
     </section>
   );
