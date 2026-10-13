@@ -1,4 +1,5 @@
 import { notFound } from "next/navigation";
+import type { Metadata } from "next";
 import { setRequestLocale } from "next-intl/server";
 import { Container } from "@/components/ui/container";
 import { Section } from "@/components/ui/section";
@@ -10,7 +11,9 @@ import { Itinerary } from "@/components/package/itinerary";
 import { BookingSteps } from "@/components/package/booking-steps";
 import { CancellationNotice } from "@/components/package/cancellation-notice";
 import { Faq } from "@/components/package/faq";
+import { PackageJsonLd } from "@/components/seo/package-jsonld";
 import { getPackage, listPackages, getSiteSettings } from "@/content/queries";
+import { buildPackageMetadata } from "@/lib/seo";
 import { routing } from "@/i18n/routing";
 import type { Locale } from "@/i18n/routing";
 
@@ -35,6 +38,17 @@ export async function generateStaticParams() {
   );
 }
 
+export async function generateMetadata({
+  params,
+}: {
+  params: Promise<{ locale: string; slug: string }>;
+}): Promise<Metadata> {
+  const { locale, slug } = await params;
+  if (slug === PLACEHOLDER_SLUG) return {};
+  const pkg = await getPackage("hajj", slug);
+  return pkg ? buildPackageMetadata(pkg, locale as Locale) : {};
+}
+
 export default async function PackageDetailPage({
   params,
 }: {
@@ -49,6 +63,7 @@ export default async function PackageDetailPage({
 
   return (
     <Section>
+      <PackageJsonLd pkg={pkg} locale={locale as Locale} />
       <Container className="max-w-3xl space-y-12">
         <PackageHeader pkg={pkg} locale={locale as Locale} whatsappNumber={site.whatsappNumber} />
         <StayBlock pkg={pkg} locale={locale as Locale} />

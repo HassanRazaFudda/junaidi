@@ -1,4 +1,5 @@
 import { notFound } from "next/navigation";
+import type { Metadata } from "next";
 import { getTranslations, setRequestLocale } from "next-intl/server";
 import { Container } from "@/components/ui/container";
 import { Section } from "@/components/ui/section";
@@ -23,6 +24,25 @@ import type { Locale } from "@/i18n/routing";
 
 export async function generateStaticParams() {
   return routing.locales.flatMap((locale) => [{ locale, season: "2027" }]);
+}
+
+// code.md §9.1 target intent: "private hajj packages 2027 Karachi," "hajj
+// 2027 package price Pakistan." No credential/authorisation claim here —
+// that's unconfirmed and gated elsewhere (DECISIONS.md #3).
+export async function generateMetadata({
+  params,
+}: {
+  params: Promise<{ season: string }>;
+}): Promise<Metadata> {
+  const { season: seasonSlug } = await params;
+  const season = await getSeason(seasonSlug);
+  if (!season) return {};
+
+  return {
+    title: `Hajj ${season.slug} packages from Karachi`,
+    description:
+      "Compare Junaidi's Hajj 2027 packages and how private Hajj booking works through the official Pak Hajj app and Hajj Portal.",
+  };
 }
 
 export default async function HajjSeasonPage({

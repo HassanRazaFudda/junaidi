@@ -1,0 +1,44 @@
+name: ci
+on: [pull_request, push]
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v5
+      - uses: pnpm/action-setup@v4 # reads packageManager from package.json
+      - uses: actions/setup-node@v5
+        with: { node-version-file: .nvmrc, cache: pnpm }
+      - run: pnpm install --frozen-lockfile
+      - run: pnpm check # typecheck + lint + format + unit
+      - run: pnpm build
+      - run: pnpm exec playwright install --with-deps chromium
+      - run: pnpm e2e
+        env:
+          # Required for the build/server to start — see .env.example and
+          # DECISIONS.md #5l. CI secrets should supply real values so the
+          # contact-form E2E test can exercise the actual Resend send path,
+          # not just its graceful-failure branch.
+          RESEND_API_KEY: ${{ secrets.RESEND_API_KEY }}
+          INQUIRY_TO_EMAIL: ${{ secrets.INQUIRY_TO_EMAIL }}
+          INQUIRY_FROM_EMAIL: ${{ secrets.INQUIRY_FROM_EMAIL }}
+          NEXT_PUBLIC_SITE_URL: ${{ secrets.NEXT_PUBLIC_SITE_URL || 'http://localhost:3210' }}
+          NEXT_PUBLIC_WHATSAPP_NUMBER: ${{ secrets.NEXT_PUBLIC_WHATSAPP_NUMBER || '923000000000' }}
+      - run: pnpm audit --audit-level=high
+
+  # code.md §17: "Add Lighthouse CI against the preview deployment." Left
+  # as a placeholder rather than a job that would always fail here — it
+  # needs a real preview-deployment URL (e.g. a Vercel preview), which
+  # doesn't exist until this project is actually deployed somewhere.
+  # Manually verified against code.md §18's budgets instead; see the
+  # Checkpoint 4 report for Lighthouse CLI numbers run locally.
+  # lighthouse:
+  #   needs: check
+  #   runs-on: ubuntu-latest
+  #   steps:
+  #     - uses: actions/checkout@v5
+  #     - uses: treosh/lighthouse-ci-action@v12
+  #       with:
+  #         urls: |
+  #           ${{ needs.check.outputs.preview_url }}
+  #           ${{ needs.check.outputs.preview_url }}/hajj/2027
+  #         budgetPath: ./lighthouse-budget.json

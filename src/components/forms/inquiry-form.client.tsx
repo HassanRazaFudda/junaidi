@@ -75,6 +75,22 @@ export function InquiryForm({ whatsappNumber }: { whatsappNumber: string }) {
               {t("errorHeading")}
             </p>
           )}
+          {state.status === "server-error" && (
+            <div role="alert" className="rounded-control border border-alert/30 bg-alert/5 p-4">
+              <p className="font-medium text-alert">{t("serverErrorHeading")}</p>
+              <p className="mt-1 text-stone">
+                {t("serverErrorBody")}{" "}
+                <a
+                  href={whatsappUrl(whatsappNumber, {})}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="underline underline-offset-4"
+                >
+                  {t("continueOnWhatsapp")}
+                </a>
+              </p>
+            </div>
+          )}
 
           {/* Honeypot: hidden from sighted and keyboard/screen-reader users. */}
           <div aria-hidden="true" className="absolute -left-[9999px]">

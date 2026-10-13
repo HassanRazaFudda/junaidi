@@ -128,7 +128,9 @@
     "sent": "Message sent",
     "sentBody": "We reply within 2 office hours. Continue on WhatsApp for a faster reply.",
     "continueOnWhatsapp": "Continue on WhatsApp",
-    "errorHeading": "Please check the form"
+    "errorHeading": "Please check the form",
+    "serverErrorHeading": "We couldn't send that just now",
+    "serverErrorBody": "Please try again, or message us directly on WhatsApp instead."
   },
   "pendingPage": {
     "heading": "Being finalised",

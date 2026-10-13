@@ -2,6 +2,20 @@
 
 Every `TODO(client)` / `TODO(client/legal)`, grouped by page/area. Updated as the build progresses — Checkpoint 2+ will add page-specific items as those pages are built.
 
+## guide.md §13 launch checklist — status
+
+- [x] No Hajj payment path anywhere on the site (verified by `tests/e2e/hajj-2027.spec.ts`)
+- [x] No AI-generated faces anywhere (none used; real people/sacred-site slots are all placeholders pending real assets — `ASSETS-NEEDED.md`)
+- [x] Reduced-motion and keyboard pass on every page (`tests/e2e/reduced-motion.spec.ts`, `tests/e2e/a11y.spec.ts` — zero serious/critical axe violations on every Phase 1 route)
+- [x] Lighthouse mobile ≥ 90 performance on Home and `/hajj/2027` (97 and 97 respectively; see DECISIONS.md #5n for the one sub-budget that still misses — LCP ~2.6s vs code.md §18's stricter <2.0s)
+- [ ] Every credential links to an official source **and** the client has approved the wording in writing — sources are linked in the data layer now, but nothing renders until `verifiedByClient: true` (DECISIONS.md #3)
+- [ ] Every package has season/price-checked date/inclusions/exclusions — enforced structurally by the Zod schema the moment real packages exist; none exist yet (DECISIONS.md #5)
+- [ ] Every photo/video of an identifiable person has consent on file — the four YouTube videos need a human to actually watch them first (`openedAndReviewed`, CLIENT-TODO "Videos" section below)
+- [ ] Phone/WhatsApp/address identical across footer, contact page, Google Business Profile, and Facebook — internally consistent across the site itself; aligning the client's Google/Facebook profiles to match is outside this codebase
+- [ ] Urdu pages reviewed by a native writer — not applicable yet, Phase 1 is English-only by scope (`DECISIONS.md` #5c)
+- [ ] Privacy policy covers form data and WhatsApp — currently a structured placeholder pending real legal text
+- [ ] Old domain (`junaidigroup.com`) directory listing disabled; redirects in place — hosting/infrastructure work outside this codebase
+
 ## Blocking Phase 1 (guide.md §3)
 
 - [ ] Written confirmation of the Hajj 2027 arrangement with Al Wakeel Munazzam, and the exact wording approved for publication. Until this arrives, the credential line and all four licence/registration rows stay hidden site-wide (DECISIONS.md #3; confirmed as the default by the user at Checkpoint 0).

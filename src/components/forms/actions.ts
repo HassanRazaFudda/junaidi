@@ -23,6 +23,7 @@ const Inquiry = z.object({
 export type InquiryState =
   | { status: "idle" }
   | { status: "error"; fieldErrors: Partial<Record<keyof z.infer<typeof Inquiry>, string[]>> }
+  | { status: "server-error" }
   | { status: "sent" };
 
 export async function submitInquiry(
@@ -34,13 +35,22 @@ export async function submitInquiry(
     return { status: "error", fieldErrors: z.flattenError(parsed.error).fieldErrors };
   if (parsed.data.company) return { status: "sent" }; // silently drop bots
 
-  const resend = new Resend(env.RESEND_API_KEY);
-  await resend.emails.send({
-    from: env.INQUIRY_FROM_EMAIL,
-    to: env.INQUIRY_TO_EMAIL,
-    subject: `New ${parsed.data.service} inquiry — ${parsed.data.name}`,
-    text: JSON.stringify(parsed.data, null, 2),
-  });
+  try {
+    const resend = new Resend(env.RESEND_API_KEY);
+    const { error } = await resend.emails.send({
+      from: env.INQUIRY_FROM_EMAIL,
+      to: env.INQUIRY_TO_EMAIL,
+      subject: `New ${parsed.data.service} inquiry — ${parsed.data.name}`,
+      text: JSON.stringify(parsed.data, null, 2),
+    });
+    if (error) throw error;
+  } catch (err) {
+    // A transient email-sending failure shouldn't crash the page for
+    // someone who just filled in a real inquiry — show a message pointing
+    // them to WhatsApp instead of an unhandled error.
+    console.error("submitInquiry: failed to send", err);
+    return { status: "server-error" };
+  }
 
   return { status: "sent" };
 }

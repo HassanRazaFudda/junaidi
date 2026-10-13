@@ -12,6 +12,8 @@ import { HeaderClient } from "@/components/layout/header.client";
 import { Footer } from "@/components/layout/footer";
 import { StickyContactBar } from "@/components/layout/sticky-contact-bar";
 import { getSiteSettings } from "@/content/queries";
+import { TravelAgencyJsonLd } from "@/components/seo/travel-agency-jsonld";
+import { env } from "@/lib/env";
 import type { Locale } from "@/i18n/routing";
 import "@/styles/globals.css";
 
@@ -19,8 +21,19 @@ export function generateStaticParams() {
   return routing.locales.map((locale) => ({ locale }));
 }
 
+// prompt.md hard rule: "Every page prerendered. Keep
+// `ensureStatic = 'navigation'` passing." code.md §6.1: "the build fails
+// if any page in the site accidentally becomes dynamic." Set on the root
+// locale layout so it applies to every route in the app.
+export const ensureStatic = "navigation";
+
 export const metadata: Metadata = {
+  metadataBase: new URL(env.NEXT_PUBLIC_SITE_URL),
   title: { default: "Junaidi Group", template: "%s · Junaidi Group" },
+  // No Al Wakeel Munazzam / Hajj 2027 credential claim here — that's
+  // unconfirmed and gated elsewhere (DECISIONS.md #3); this description
+  // only states the one thing that's actually settled, the tagline itself.
+  description: "Hajj and Umrah from Karachi, with a team that travels with you.",
 };
 
 export default async function LocaleLayout({
@@ -48,6 +61,7 @@ export default async function LocaleLayout({
       className={`${archivo.variable} ${nastaliq.variable} ${amiri.variable}`}
     >
       <body>
+        <TravelAgencyJsonLd />
         <NextIntlClientProvider>
           <MotionProvider>
             <SkipLink />
