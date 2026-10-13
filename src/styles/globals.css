@@ -87,6 +87,14 @@
   html {
     background: var(--color-marble);
     color: var(--color-ink);
+    /* Safety net, not the primary fix: a wide descendant (the trust-strip
+     * marquee track, a snap-scroll card row's flex children — both hit
+     * this during the build, both fixed at the source with min-w-0) can
+     * still force document-level horizontal scroll if a future component
+     * repeats the same CSS min-width:auto mistake. This bounds the blast
+     * radius to that one component's own clipping instead of the whole
+     * page, without hiding content that's supposed to scroll internally. */
+    overflow-x: hidden;
   }
   body {
     font-family: var(--font-sans);
@@ -106,6 +114,34 @@
     font-variation-settings: "wdth" 112;
     font-weight: 650;
     letter-spacing: -0.01em;
+  }
+  /* fix.md §3.4's type table: Meta and Price roles are "tabular numerals" —
+   * missed in the original component build, caught in a UI review pass.
+   * Scoped to the two text-size utilities those roles actually use, not a
+   * blanket rule, so it doesn't affect unrelated text that happens to share
+   * a font-size with a price/meta line. */
+  .text-meta,
+  .text-price {
+    font-variant-numeric: tabular-nums;
+  }
+  /* Hero text sits directly on a photo whose brightness varies by scroll
+   * position (the aerial crowd/courtyard has bright, busy areas) — the
+   * gradient overlay alone doesn't guarantee contrast everywhere under it.
+   * A soft shadow is the standard backstop for text over photography;
+   * caught in a UI review pass checking contrast-readability, not visible
+   * in a flat-color screenshot but real once scrolled/resized. */
+  .hero-text-shadow {
+    text-shadow: 0 2px 16px rgb(17 23 38 / 0.55);
+  }
+  /* Snap-scroll card rows (Hajj band tiers): the horizontal snap + partial-
+   * next-card peek is the scroll affordance — a visible native scrollbar
+   * track underneath it is redundant chrome, not a second affordance. */
+  .scrollbar-hide {
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+  }
+  .scrollbar-hide::-webkit-scrollbar {
+    display: none;
   }
 }
 
@@ -176,5 +212,35 @@ dialog[open]::backdrop {
     animation-duration: 0.01ms !important;
     transition-duration: 0.01ms !important;
     scroll-behavior: auto !important;
+  }
+}
+
+/*
+ * Trust strip marquee (fix.md §4.3's 5-item strip, requested to auto-scroll
+ * like a ticker). The track holds the real list plus an aria-hidden
+ * duplicate, translateX 0 → -50% loops seamlessly since both copies are
+ * equal width. Pausing on hover lets a visitor actually read/click an item
+ * instead of it sliding away mid-interaction.
+ */
+.trust-strip-track {
+  animation: trust-strip-marquee 28s linear infinite;
+}
+.trust-strip-track:hover {
+  animation-play-state: paused;
+}
+@keyframes trust-strip-marquee {
+  to {
+    transform: translateX(-50%);
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .trust-strip-wrap {
+    overflow-x: auto;
+  }
+  .trust-strip-track {
+    animation: none;
+  }
+  .trust-strip-copy {
+    display: none;
   }
 }

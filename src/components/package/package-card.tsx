@@ -29,7 +29,7 @@ export async function PackageCard({
   const title = pick(pkg.title, locale);
 
   return (
-    <div className="card-hover group flex flex-col overflow-hidden rounded-card border border-line bg-paper">
+    <div className="card-hover group flex h-full flex-col overflow-hidden rounded-card border border-line bg-paper">
       <div className="relative aspect-[16/10] overflow-hidden">
         {pkg.photo ? (
           <Image

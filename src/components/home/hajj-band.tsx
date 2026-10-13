@@ -14,6 +14,15 @@ import type { Locale } from "@/i18n/routing";
 // through the official Pak Hajj app (guide.md §2 rule 1 — never a payment
 // button here). Hidden entirely if there's no real season/packages yet,
 // same "no pending panel" treatment as every other section.
+//
+// Right side is a horizontal snap-scroll row, not a vertical stack —
+// fix.md §7's mobile note ("package grid becomes a horizontal snap
+// carousel, 1.1 cards visible") was originally missed here entirely (the
+// cards had no column/width rules at all, just an unconstrained vertical
+// list). Besides matching that spec, a 3-card vertical stack next to a
+// much shorter text column looked broken regardless of text alignment —
+// the real fix was giving the cards column a sane height, not moving the
+// text around it.
 export async function HajjBand({
   locale,
   whatsappNumber,
@@ -37,7 +46,7 @@ export async function HajjBand({
 
   return (
     <Section className="pattern-star-ink bg-ink text-paper">
-      <Container className="grid gap-10 lg:grid-cols-2 lg:items-center lg:gap-16">
+      <Container className="grid gap-10 lg:grid-cols-2 lg:items-start lg:gap-16">
         <Reveal>
           <p className="text-caption font-medium text-crimson-night">{t("eyebrow")}</p>
           <h2 className="font-display mt-1 text-h2 text-paper">{t("heading")}</h2>
@@ -54,7 +63,8 @@ export async function HajjBand({
         </Reveal>
 
         <StaggerGrid
-          className="grid gap-6"
+          className="scrollbar-hide flex min-w-0 snap-x snap-mandatory gap-6 overflow-x-auto"
+          itemClassName="w-[75%] shrink-0 snap-start sm:w-80"
           items={tiers.map((pkg) => ({
             id: pkg.id,
             node: <PackageCard pkg={pkg} locale={locale} whatsappNumber={whatsappNumber} />,

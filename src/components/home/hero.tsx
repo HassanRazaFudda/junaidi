@@ -1,10 +1,10 @@
-import Image from "next/image";
 import { getTranslations } from "next-intl/server";
 import { Link } from "@/i18n/navigation";
 import { Container } from "@/components/ui/container";
 import { buttonStyles } from "@/components/ui/button";
 import { WhatsAppIcon } from "@/components/ui/whatsapp-icon";
 import { InquiryBar } from "@/components/home/inquiry-bar.client";
+import { HeroVideoBackground } from "@/components/home/hero-video-background.client";
 import { HeroLoadSequenceEnhancer } from "@/components/home/hero-load-sequence.enhancer";
 import { whatsappUrl } from "@/lib/whatsapp";
 import { getCurrentHajjSeason, isCredentialConfirmed } from "@/content/queries";
@@ -38,33 +38,40 @@ export async function Hero({ locale, whatsappNumber }: { locale: Locale; whatsap
       <div className="relative isolate overflow-hidden bg-ink">
         <div className="absolute inset-0 -z-10">
           <div className="hero-bg absolute inset-0">
-            <Image
-              src="https://images.pexels.com/photos/36954370/pexels-photo-36954370/free-photo-of-aerial-view-of-mecca-s-grand-mosque-at-night.jpeg?auto=compress&cs=tinysrgb&w=1920"
-              alt=""
-              fill
-              loading="eager"
-              fetchPriority="high"
-              sizes="100vw"
-              className="object-cover"
+            <HeroVideoBackground
+              poster="https://images.pexels.com/photos/36954370/pexels-photo-36954370/free-photo-of-aerial-view-of-mecca-s-grand-mosque-at-night.jpeg?auto=compress&cs=tinysrgb&w=1920"
+              videoSrc="https://videos.pexels.com/video-files/36129822/15321345_1870_1080_30fps.mp4"
             />
           </div>
+          {/* Darker than the still-photo version was (.45/.82 vs .35/.75) —
+              moving footage draws more visual attention than a static photo,
+              so text needs a stronger backstop to stay legible over it,
+              on top of the hero-text-shadow already on each text element. */}
           <div
             className="absolute inset-0"
             style={{
-              background: "linear-gradient(180deg, rgba(17,23,38,.35) 0%, rgba(17,23,38,.75) 100%)",
+              background: "linear-gradient(180deg, rgba(17,23,38,.45) 0%, rgba(17,23,38,.82) 100%)",
             }}
           />
           <div className="hero-overlay-scroll absolute inset-0 bg-ink" />
         </div>
 
-        <Container className="flex min-h-[80svh] flex-col justify-end gap-5 pt-20 pb-16 lg:min-h-[78vh] lg:pb-28">
-          <p dir="rtl" lang="ar" className="hero-talbiyah font-arabic text-[28px] text-paper/80">
+        <Container className="flex min-h-[80svh] flex-col justify-end gap-5 pt-10 pb-20 lg:min-h-[66vh] lg:pb-44">
+          <p
+            dir="rtl"
+            lang="ar"
+            className="hero-talbiyah hero-text-shadow font-arabic text-[28px] text-paper/80"
+          >
             لَبَّيْكَ اللَّهُمَّ لَبَّيْكَ
           </p>
-          <h1 className="hero-h1 font-display text-display text-paper">{t("headline")}</h1>
-          <p className="hero-sub max-w-prose text-lead text-paper/85">{t("subhead")}</p>
+          <h1 className="hero-h1 hero-text-shadow font-display text-display text-paper">
+            {t("headline")}
+          </h1>
+          <p className="hero-sub hero-text-shadow max-w-prose text-lead text-paper">
+            {t("subhead")}
+          </p>
           {season && credentialConfirmed && (
-            <p className="max-w-prose text-small text-paper/70">
+            <p className="hero-text-shadow max-w-prose text-small text-paper/90">
               {pick(season.credentialLine, locale)}
             </p>
           )}
@@ -103,7 +110,7 @@ export async function Hero({ locale, whatsappNumber }: { locale: Locale; whatsap
         </Container>
       </div>
 
-      <Container className="hero-inquiry relative z-10 py-10 lg:-mt-20 lg:py-0">
+      <Container className="hero-inquiry relative z-10 py-10 lg:-mt-20 lg:pt-0 lg:pb-14">
         <InquiryBar />
       </Container>
       <HeroLoadSequenceEnhancer />

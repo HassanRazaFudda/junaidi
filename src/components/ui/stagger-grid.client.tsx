@@ -20,9 +20,12 @@ const item = {
 export function StaggerGrid({
   items,
   className,
+  itemClassName,
 }: {
   items: { id: string; node: ReactNode }[];
   className?: string;
+  /** e.g. "shrink-0 w-[85vw] snap-start" for a horizontal snap-scroll row instead of a grid. */
+  itemClassName?: string;
 }) {
   return (
     <m.ul
@@ -33,7 +36,7 @@ export function StaggerGrid({
       className={className}
     >
       {items.map((i) => (
-        <m.li key={i.id} variants={item}>
+        <m.li key={i.id} variants={item} className={itemClassName}>
           {i.node}
         </m.li>
       ))}
