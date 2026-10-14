@@ -22,7 +22,10 @@ describe("demo content mode", () => {
     const hajj = await localAdapter.listPackages({ type: "hajj" });
     const umrah = await localAdapter.listPackages({ type: "umrah" });
     expect(hajj.every((p) => !p.id.startsWith("sample-"))).toBe(true);
-    expect(umrah).toHaveLength(0); // no real Umrah packages exist either
+    // Two real, sourced Umrah packages exist (DECISIONS.md #5z+7) — live
+    // mode must show them, but never a sample- one.
+    expect(umrah.length).toBeGreaterThan(0);
+    expect(umrah.every((p) => !p.id.startsWith("sample-"))).toBe(true);
 
     const reviews = await localAdapter.listReviews();
     expect(reviews.every((r) => !r.id.startsWith("sample-"))).toBe(true);
@@ -40,7 +43,11 @@ describe("demo content mode", () => {
     expect(hajj.length).toBeGreaterThan(0);
     expect(umrah.length).toBeGreaterThan(0);
     expect(hajj.every((p) => p.sample)).toBe(true);
-    expect(umrah.every((p) => p.sample)).toBe(true);
+    // Demo mode is real + sample together (src/content/local/adapter.ts),
+    // not sample-only — Umrah now has two real rows (DECISIONS.md #5z+7),
+    // so both kinds must be present rather than every row being a sample.
+    expect(umrah.some((p) => p.sample)).toBe(true);
+    expect(umrah.some((p) => !p.sample)).toBe(true);
 
     const reviews = await localAdapter.listReviews(10);
     expect(reviews.length).toBeGreaterThan(0);

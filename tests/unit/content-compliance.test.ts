@@ -65,8 +65,17 @@ describe("guide.md §2 compliance rules encoded as tests", () => {
     ).toThrow();
   });
 
-  it("no live package exists in Phase 1 seed data (no invented facts, DECISIONS.md #5)", () => {
-    expect(packages.filter((p) => Package.parse(p).status === "live")).toHaveLength(0);
+  it("no live Hajj package exists in Phase 1 seed data (no invented facts, DECISIONS.md #5)", () => {
+    // Umrah packages are allowed now — two real, sourced rows landed in
+    // DECISIONS.md #5z+7. Hajj 2027 stays empty: guide.md §3's blocking
+    // specifics (hotels, exact duration, inclusions) still haven't arrived,
+    // and the only real data found so far (a price and a duration range)
+    // isn't specific enough to fill the required fields without guessing.
+    expect(
+      packages.filter(
+        (p) => Package.parse(p).type === "hajj" && Package.parse(p).status === "live",
+      ),
+    ).toHaveLength(0);
   });
 
   it("unconfirmed credentials (verifiedByClient: false) never reach the public list", async () => {

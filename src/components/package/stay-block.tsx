@@ -16,10 +16,13 @@ export function StayBlock({ pkg, locale }: { pkg: Package; locale: Locale }) {
               {hotel.orSimilar && <span className="text-stone"> or similar</span>}
             </dt>
             <dd className="mt-1 text-stone">
-              {hotel.distanceMeters && <span>{hotel.distanceMeters}m from the Haram</span>}
-              {hotel.distanceNote && <span> ({pick(hotel.distanceNote, locale)})</span>}
-              {hotel.distanceMeters && <span> · </span>}
-              {pick(hotel.roomSharing, locale)}
+              {[
+                hotel.distanceMeters ? `${hotel.distanceMeters}m from the Haram` : null,
+                hotel.distanceNote ? `(${pick(hotel.distanceNote, locale)})` : null,
+                pick(hotel.roomSharing, locale),
+              ]
+                .filter(Boolean)
+                .join(" · ")}
             </dd>
           </div>
         ))}

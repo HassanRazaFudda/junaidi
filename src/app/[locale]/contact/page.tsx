@@ -7,8 +7,9 @@ import { getSiteSettings } from "@/content/queries";
 import { routing } from "@/i18n/routing";
 
 // guide.md §5.9: office map, landline, WhatsApp, email, hours, and the
-// short inquiry form. Email and hours are both unconfirmed (CLIENT-TODO.md)
-// — omitted rather than guessed. Never asks for passport/CNIC.
+// short inquiry form. Email resolved via Facebook's own Contact info page
+// (DECISIONS.md #5z+7); hours are still unconfirmed (CLIENT-TODO.md) —
+// omitted rather than guessed. Never asks for passport/CNIC.
 export function generateStaticParams() {
   return routing.locales.map((locale) => ({ locale }));
 }
@@ -36,6 +37,13 @@ export default async function ContactPage({ params }: { params: Promise<{ locale
               {site.landline}
             </a>
           </p>
+          {site.email && (
+            <p className="mt-1">
+              <a href={`mailto:${site.email}`} className="hover:text-crimson">
+                {site.email}
+              </a>
+            </p>
+          )}
           <div className="mt-6">
             <PlaceholderMedia
               assetId="contact-map"
