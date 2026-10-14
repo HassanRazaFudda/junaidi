@@ -16,7 +16,7 @@ export async function generateMetadata(): Promise<Metadata> {
   return {
     title: "Umrah packages from Karachi",
     description:
-      "Compare Junaidi's Umrah packages by month and tier — hotels, flights and visa included.",
+      "Compare Junaidi's Umrah packages by month and tier: hotels, flights and visa included.",
   };
 }
 

@@ -38,12 +38,12 @@ const points = [
   {
     Icon: Building2,
     title: "Visa, tickets and hotels",
-    body: "Everything under one roof — one point of contact, start to finish.",
+    body: "Everything under one roof, one point of contact, start to finish.",
   },
   {
     Icon: MapPin,
     title: "A real office you can visit",
-    body: "Mona Square, Karachi — come in and talk to us in person.",
+    body: "Mona Square, Karachi. Come in and talk to us in person.",
   },
 ] as const;
 

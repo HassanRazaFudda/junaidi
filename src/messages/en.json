@@ -152,7 +152,7 @@
     "whatsappNumber": "WhatsApp number",
     "getQuote": "Get a quote",
     "sending": "Sending",
-    "sent": "Sent — we'll reply on WhatsApp",
+    "sent": "Sent, we'll reply on WhatsApp",
     "errorHeading": "Please check the form"
   },
   "trustStrip": {
@@ -171,6 +171,6 @@
   },
   "ctaBand": {
     "heading": "Talk to our Hajj & Umrah desk",
-    "body": "Message us on WhatsApp or call during office hours — we reply within 2 office hours."
+    "body": "Message us on WhatsApp or call during office hours. We reply within 2 office hours."
   }
 }

@@ -31,7 +31,7 @@ export default async function HowPrivateHajjBookingWorksPage({
         <h1 className="font-display text-h1">How private Hajj booking works</h1>
         <p className="mt-4 max-w-prose text-lead text-stone">
           Private Hajj 2027 bookings and payments happen only through the official Hajj Portal or
-          the Pak Hajj app — never directly to Junaidi.
+          the Pak Hajj app, never directly to Junaidi.
         </p>
         <p className="mt-2 text-caption text-stone italic">
           This sequence is pending review by the client&rsquo;s scholar before final publication.

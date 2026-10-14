@@ -15,11 +15,29 @@ export async function SeasonStrip({ locale }: { locale: Locale }) {
 
   return (
     <div className="bg-ink text-marble">
-      <Container className="flex flex-wrap items-center justify-between gap-x-6 gap-y-1 py-2 text-caption">
+      <Container className="flex flex-col gap-y-1 py-2 text-caption sm:flex-row sm:flex-wrap sm:items-center sm:justify-between sm:gap-x-6">
         {banner ? (
-          <Link href={banner.href} className="underline-offset-4 hover:underline">
-            {banner.message}
-          </Link>
+          // The deadline message plus phone/WhatsApp often doesn't fit one
+          // mobile-width row — wrapping it onto an extra line still read as
+          // cramped, so below sm it auto-slides like the trust strip
+          // instead (same wrap/track/copy pattern, globals.css). sm+ has
+          // room for both on one row, so this reverts to plain inline text
+          // and the duplicate copy is hidden.
+          <div className="season-strip-wrap min-w-0 overflow-hidden sm:overflow-visible">
+            <div className="season-strip-track flex w-max gap-16 whitespace-nowrap sm:w-auto sm:gap-0 sm:whitespace-normal">
+              <Link href={banner.href} className="underline-offset-4 hover:underline">
+                {banner.message}
+              </Link>
+              <Link
+                href={banner.href}
+                aria-hidden
+                tabIndex={-1}
+                className="season-strip-copy underline-offset-4 hover:underline sm:hidden"
+              >
+                {banner.message}
+              </Link>
+            </div>
+          </div>
         ) : (
           <span />
         )}

@@ -30,18 +30,20 @@ Every `TODO(client)` / `TODO(client/legal)`, grouped by page/area. Updated as th
 ## Licences and credentials (guide.md §1.1)
 
 - [ ] DTS licence 2357, IATA 27-31139-5, HGO enrolment 4299 — currently sourced only from a secondary directory (Ibadat.pk); need the original certificates to verify.
+- [ ] Footer badge row (added 2026-10-14, `components/layout/footer.tsx`) — confirm each mark is correct and the agency actually holds that membership/registration: IATA, HOAP (Hajj Organizers Association of Pakistan), TAAP (Travel Agents Association of Pakistan), SECP, and which exact Pakistan-government seal belongs in the row (currently showing the plain state emblem — could also be the Ministry of Foreign Affairs circular seal, these look near-identical at the source banner's resolution). Positions were our best read of a low-resolution reference banner the client supplied, not independently verified (DECISIONS.md #5z). Once confirmed, add real `Credential` records for HOAP/TAAP/SECP (they have none today) the same way IATA/DTS/HGO are modelled, with a citable `sourceUrl`.
 - [ ] "Founded 2005" — currently only the company's own self-description; not published as fact until confirmed.
 - [ ] Leadership names/titles — not published until the client confirms who should appear.
 - [ ] Official MoRA 2025–26 Umrah attested-operators list URL — guide.md §1.4 asserts Junaidi is on this list, but only a 2021–22 list is linked in guide.md's sources. No Credential record was created for this without a real citable source (DECISIONS.md #4).
 
 ## Videos (guide.md §1.6)
 
-- [ ] guide.md explicitly asks to "open each one before using it" — this agent cannot screen video content or verify consent/face-visibility compliance. All four YouTube videos are in the data layer with real IDs and season labels but `openedAndReviewed: false`, so none render yet. A human needs to watch each one and flip the flag in `src/content/local/data/videos.ts`:
+- [x] All five opened and scrubbed through in browser (2026-10-14), confirmed real on the client's own "Junaidi Air Travels" channel, `openedAndReviewed: true` in `src/content/local/data/videos.ts`. See DECISIONS.md #5z+1: consent-for-filming is the agency's own operational matter for its own past-client footage, not something visual review from outside resolves either way — flipped per the user's explicit direction, not a claim that every frame was legally cleared.
   - `kvf_3_NYtSY` — Special Hajj packages, Hajj 2024
   - `zM_GAKnPZZw` — VIP/Deluxe halls in Arafat, Hajj 2025
   - `YhAEdfjsmgA` — VIP camps in Mina, Hajj 2025
   - `m6SOo712028` — Brand clip
-  - `G3-Y2EFkwps` — "Our exclusive Hajj package offers the best location" (added per fix.md §5.2; confirmed real via browser, on the client's own channel, not yet screened for consent)
+  - `G3-Y2EFkwps` — "Our exclusive Hajj package offers the best location"
+- [ ] A sixth real video the user pointed at, `SY_QAy_FETE` ("A Simple Guide to Hajj"), was **not** added — at ~45 minutes it doesn't fit fix.md §4.5's short-highlight-clip card format regardless of content. Worth a short, purpose-cut highlight reel if the client wants more than these five.
 - [ ] Facebook "Junaidi Group Highlights of HAJJ 2025" clip — guide.md flags this as the best hero-loop candidate; need the original file from the client.
 
 ## Office

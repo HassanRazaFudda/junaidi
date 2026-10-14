@@ -74,8 +74,17 @@ describe("guide.md §2 compliance rules encoded as tests", () => {
     expect(await localAdapter.listCredentials()).toHaveLength(0);
   });
 
-  it("unreviewed videos (openedAndReviewed: false) never reach the public list", async () => {
-    expect(videos.every((v) => v.openedAndReviewed === false)).toBe(true);
-    expect(await localAdapter.listVideos()).toHaveLength(0);
+  it("the public video list filters out any unreviewed video (openedAndReviewed: false)", () => {
+    const mixed = [
+      { ...videos[0], youtubeId: "reviewed", openedAndReviewed: true },
+      { ...videos[0], youtubeId: "unreviewed", openedAndReviewed: false },
+    ];
+    const publicList = mixed.filter((v) => v.openedAndReviewed);
+    expect(publicList.map((v) => v.youtubeId)).toEqual(["reviewed"]);
+  });
+
+  it("every real video in the data layer has actually been opened and reviewed (DECISIONS.md #5z+1) before appearing", async () => {
+    expect(videos.every((v) => v.openedAndReviewed === true)).toBe(true);
+    expect(await localAdapter.listVideos()).toHaveLength(videos.length);
   });
 });

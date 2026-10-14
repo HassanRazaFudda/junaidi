@@ -38,7 +38,7 @@ export const routeStops: RouteStop[] = [
     dateLabel: "9 Dhul Hijjah",
     place: "Arafat",
     youDo:
-      "Spend the day at Arafat from noon until sunset in prayer and remembrance — the central rite of Hajj.",
+      "Spend the day at Arafat from noon until sunset in prayer and remembrance, the central rite of Hajj.",
     assetDescription: "Junaidi Arafat hall, Hajj 2025 (or licensed Jabal al-Rahmah)",
   },
   {

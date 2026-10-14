@@ -1,6 +1,6 @@
 "use client";
 
-import { useId, useRef, useState } from "react";
+import { useEffect, useId, useRef, useState } from "react";
 import { Play, X } from "lucide-react";
 import { useTranslations } from "next-intl";
 import { AnimatePresence } from "motion/react";
@@ -21,6 +21,19 @@ import * as m from "motion/react-m";
 // the thumbnail specifically, since it needs an onError fallback from
 // maxresdefault to hqdefault — not every video has a maxres thumbnail, and
 // next/image's loader doesn't support a runtime fallback chain.
+//
+// onError alone isn't enough: a video with no maxres thumbnail doesn't
+// always 404 cleanly — i.ytimg.com can respond 404 with a valid tiny
+// 120×90 placeholder JPEG body, which the browser decodes successfully
+// (no error event; onLoad fires like any normal image). Caught live:
+// zM_GAKnPZZw/YhAEdfjsmgA both rendered that placeholder instead of
+// falling back. Checked two ways, both needed: onLoad for a fresh network
+// load, and a mount-time effect reading `img.complete`/`naturalWidth` off
+// a ref for an already-cached image, whose load event can fire (from the
+// browser's HTTP cache) before React finishes attaching the onLoad
+// handler — caught live too, once the carousel below started rendering a
+// second (duplicate) copy of each thumbnail and the cached first copy's
+// fallback never re-ran.
 export function YoutubeFacade({
   youtubeId,
   title,
@@ -31,12 +44,21 @@ export function YoutubeFacade({
   seasonLabel: string;
 }) {
   const dialogRef = useRef<HTMLDialogElement>(null);
+  const imgRef = useRef<HTMLImageElement>(null);
   const [open, setOpen] = useState(false);
+  const hqThumb = `https://i.ytimg.com/vi/${youtubeId}/hqdefault.jpg`;
   const [thumb, setThumb] = useState(`https://i.ytimg.com/vi/${youtubeId}/maxresdefault.jpg`);
   const t = useTranslations("common");
   const layoutId = useId();
 
   const requestClose = () => setOpen(false);
+
+  useEffect(() => {
+    const img = imgRef.current;
+    if (img?.complete && img.naturalWidth <= 120 && thumb !== hqThumb) {
+      setThumb(hqThumb);
+    }
+  }, [thumb, hqThumb]);
 
   return (
     <>
@@ -52,14 +74,22 @@ export function YoutubeFacade({
         >
           {/* eslint-disable-next-line @next/next/no-img-element -- onError fallback chain, see comment above */}
           <img
+            ref={imgRef}
             src={thumb}
-            onError={() => setThumb(`https://i.ytimg.com/vi/${youtubeId}/hqdefault.jpg`)}
+            onError={() => setThumb(hqThumb)}
+            onLoad={(e) => {
+              if (e.currentTarget.naturalWidth <= 120 && thumb !== hqThumb) {
+                setThumb(hqThumb);
+              }
+            }}
             alt=""
             className="absolute inset-0 size-full object-cover"
           />
           <div className="absolute inset-0 bg-gradient-to-t from-ink/80 via-transparent to-transparent" />
-          <span className="relative inline-flex size-16 items-center justify-center rounded-full bg-paper/90 group-hover:bg-paper">
-            <Play aria-hidden className="size-6 translate-x-0.5 fill-crimson text-crimson" />
+          <span className="absolute inset-0 flex items-center justify-center">
+            <span className="inline-flex size-16 items-center justify-center rounded-full bg-paper/90 group-hover:bg-paper">
+              <Play aria-hidden className="size-6 translate-x-0.5 fill-crimson text-crimson" />
+            </span>
           </span>
           <span className="absolute inset-x-0 bottom-0 p-3 text-start text-marble">
             <span className="block text-small font-medium">{title}</span>

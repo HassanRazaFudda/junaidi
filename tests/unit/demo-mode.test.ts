@@ -54,11 +54,15 @@ describe("demo content mode", () => {
     expect(credentials.every((c) => !c.verifiedByClient)).toBe(true);
   });
 
-  it("demo mode never fabricates a video — only real, human-reviewed ones would show", async () => {
+  it("demo mode never fabricates a video — it shows the same real, human-reviewed ones as live mode", async () => {
     process.env.NEXT_PUBLIC_CONTENT_MODE = "demo";
     const { localAdapter } = await import("@/content/local/adapter");
-    // All four real videos are still openedAndReviewed: false
-    // (CLIENT-TODO.md) — demo mode must not bypass that gate.
-    expect(await localAdapter.listVideos()).toHaveLength(0);
+    const { videos } = await import("@/content/local/data/videos");
+    // Videos aren't gated by content mode at all, only by
+    // openedAndReviewed (DECISIONS.md #5z+1) — demo mode doesn't add or
+    // remove any relative to what's actually in the data layer.
+    const listed = await localAdapter.listVideos();
+    expect(listed).toHaveLength(videos.length);
+    expect(listed.every((v) => v.openedAndReviewed === true)).toBe(true);
   });
 });

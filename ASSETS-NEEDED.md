@@ -38,6 +38,10 @@ Two more photos were sourced (verified free, credited) but ended up **not placed
 - **Wordmark lockup** — not supplied. No "Junaidi Group" wordmark artwork file exists (only the icon). Header/footer pair the untouched icon with "Junaidi Group" set as real text in the site's own Archivo type (not a redraw of a wordmark that was never supplied).
 - **Favicon** — pending. Needs the SVG redraw above before it can be produced per design.md §8's spec ("the arch/icon mark in ink on marble").
 
+## Footer accreditation badges (added 2026-10-14)
+
+- `components/layout/footer.tsx`'s bottom badge strip: Government of Pakistan emblem, HOAP, TAAP, IATA, SECP — `public/brand/credentials/*-01.webp`. Client pointed at a low-resolution reference banner and asked for "these badges"; the user then sourced 5 of 9 candidate logos themselves (3 of the 9 were rejected as unrelated marks — Vision 2030, Saudi Ministry of Foreign Affairs, "Rawaf Mina for Pilgrims Services"). Positions are a best-guess match against that banner, not independently confirmed — see DECISIONS.md #5z and CLIENT-TODO.md "Licences and credentials" for what still needs the client's sign-off.
+
 ## Home (design.md §10.1)
 
 - **H-01/H-02 hero video loop + poster** — superseded for the review build by fix.md §3.2's full-bleed photo hero (`components/home/hero.tsx`), using the licensed Haram-at-night stock photo above instead of the arch-framed `PlaceholderMedia` block the v2 design used. Once Junaidi's own hero footage arrives (guide.md §1.6), it replaces the stock photo here — the surrounding markup (gradient overlay, Talbiyah line, H1) doesn't need to change for that swap.

@@ -244,3 +244,63 @@ dialog[open]::backdrop {
     display: none;
   }
 }
+
+/*
+ * SeasonStrip top-bar deadline message (components/layout/season-strip.tsx):
+ * below sm it's doubled and slides like the trust strip above instead of
+ * wrapping onto an extra line next to the phone/WhatsApp contact info. sm+
+ * reverts to plain inline text (component hides the duplicate and drops the
+ * fixed width there), so this animation only ever applies below that.
+ */
+@media (max-width: 639px) {
+  .season-strip-track {
+    animation: season-strip-marquee 11s linear infinite;
+  }
+  .season-strip-track:hover {
+    animation-play-state: paused;
+  }
+}
+@keyframes season-strip-marquee {
+  to {
+    transform: translateX(-50%);
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .season-strip-wrap {
+    overflow-x: auto;
+  }
+  .season-strip-track {
+    animation: none;
+  }
+  .season-strip-copy {
+    display: none;
+  }
+}
+
+/*
+ * Past-groups video carousel (components/home/past-groups-carousel.client.tsx):
+ * same wrap/track/copy auto-marquee technique as the trust strip above,
+ * paused on hover so a visitor can read a title or click into a video.
+ */
+.past-groups-track {
+  animation: past-groups-marquee 36s linear infinite;
+}
+.past-groups-track:hover {
+  animation-play-state: paused;
+}
+@keyframes past-groups-marquee {
+  to {
+    transform: translateX(-50%);
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .past-groups-wrap {
+    overflow-x: auto;
+  }
+  .past-groups-track {
+    animation: none;
+  }
+  .past-groups-copy {
+    display: none;
+  }
+}

@@ -14,7 +14,7 @@ export function TravelBlock({ pkg }: { pkg: Package }) {
           <dt className="inline font-medium text-ink">Flights: </dt>
           <dd className="inline">
             {pkg.flights.included ? "Included" : "Not included"}
-            {pkg.flights.airline && ` — ${pkg.flights.airline}`}
+            {pkg.flights.airline && ` · ${pkg.flights.airline}`}
             {pkg.flights.baggage && ` (${pkg.flights.baggage} baggage)`}
           </dd>
         </div>

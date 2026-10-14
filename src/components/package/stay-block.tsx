@@ -12,7 +12,7 @@ export function StayBlock({ pkg, locale }: { pkg: Package; locale: Locale }) {
         {pkg.hotels.map((hotel) => (
           <div key={`${hotel.city}-${hotel.name}`}>
             <dt className="font-medium">
-              {hotel.city} — {hotel.name}
+              {hotel.city} · {hotel.name}
               {hotel.orSimilar && <span className="text-stone"> or similar</span>}
             </dt>
             <dd className="mt-1 text-stone">

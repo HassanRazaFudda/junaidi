@@ -18,7 +18,7 @@ export function CancellationNotice({ portalUrl }: { portalUrl: string }) {
           Pak Hajj portal
         </a>
         , since payment is made there, not to Junaidi directly. Junaidi&rsquo;s own cancellation
-        terms are being finalised with legal counsel — see our{" "}
+        terms are being finalised with legal counsel; see our{" "}
         <Link href="/cancellation-policy" className="underline underline-offset-4">
           cancellation policy
         </Link>

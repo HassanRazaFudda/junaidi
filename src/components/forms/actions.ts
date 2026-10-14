@@ -44,7 +44,7 @@ export async function submitInquiry(
     const { error } = await resend.emails.send({
       from: env.INQUIRY_FROM_EMAIL,
       to: env.INQUIRY_TO_EMAIL,
-      subject: `New ${parsed.data.service} inquiry — ${parsed.data.name ?? "quick inquiry bar"}`,
+      subject: `New ${parsed.data.service} inquiry: ${parsed.data.name ?? "quick inquiry bar"}`,
       text: JSON.stringify(parsed.data, null, 2),
     });
     if (error) throw error;

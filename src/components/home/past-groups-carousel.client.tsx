@@ -1,35 +1,43 @@
 "use client";
 
-import { useRef, type ReactNode } from "react";
-import * as m from "motion/react-m";
+import type { ReactNode } from "react";
 
-// fix.md §8 "Past groups carousel": "Drag with momentum, snap." Motion's
-// `drag="x"` + `dragConstraints` against the wrapper ref gives click-and-
-// drag on desktop (the previous `overflow-x-auto` only supported trackpad/
-// scrollbar/touch, not a mouse drag) with its own built-in inertia on
-// release. Precise snap-to-card targets would need measuring each card's
-// width/gap and animating to the nearest multiple on drag end — left as a
-// reasonable simplification for a carousel that currently renders zero
-// cards (every video is still gated on human review, DECISIONS.md #5t);
-// momentum deceleration alone already reads as a carousel, not a loose
-// scroll area.
+// fix.md §8 "Past groups carousel" originally asked for a manual
+// Motion `drag="x"` carousel (momentum + snap) — fine when it rendered
+// zero cards (every video still gated on human review). Now that 5 real
+// videos render (DECISIONS.md #5z+1), only ~3.5 cards fit in the
+// viewport and nothing hinted the rest existed off-screen. Switched to
+// the trust strip's auto-sliding marquee pattern instead (globals.css's
+// `.trust-strip-track`): continuous CSS animation, paused on hover so a
+// visitor can read a title or click into a video, content duplicated
+// once for a seamless loop.
+//
+// Unlike the trust strip's duplicate (plain text links), each duplicated
+// item here is a real YoutubeFacade <button> — `aria-hidden` alone hides
+// it from assistive tech but leaves it reachable by Tab, a genuine
+// WCAG 4.1.2 violation axe caught in e2e (`tests/e2e/a11y.spec.ts`):
+// "Focusable content should be disabled or be removed from the DOM".
+// `inert` fixes both at once: out of the accessibility tree and out of
+// the tab order, in one standard HTML attribute.
 export function PastGroupsCarousel({ items }: { items: { id: string; node: ReactNode }[] }) {
-  const trackRef = useRef<HTMLDivElement>(null);
-
   return (
-    <div ref={trackRef} className="mt-6 overflow-hidden">
-      <m.div
-        className="flex cursor-grab gap-4 pb-2 active:cursor-grabbing"
-        drag="x"
-        dragConstraints={trackRef}
-        dragElastic={0.12}
-      >
-        {items.map((i) => (
-          <div key={i.id} className="shrink-0">
-            {i.node}
-          </div>
-        ))}
-      </m.div>
+    <div className="past-groups-wrap mt-6 min-w-0 overflow-hidden">
+      <div className="past-groups-track flex w-max gap-4 pb-2">
+        <div className="flex shrink-0 gap-4">
+          {items.map((i) => (
+            <div key={i.id} className="shrink-0">
+              {i.node}
+            </div>
+          ))}
+        </div>
+        <div className="past-groups-copy flex shrink-0 gap-4" aria-hidden inert>
+          {items.map((i) => (
+            <div key={i.id} className="shrink-0">
+              {i.node}
+            </div>
+          ))}
+        </div>
+      </div>
     </div>
   );
 }

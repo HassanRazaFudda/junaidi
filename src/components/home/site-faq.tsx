@@ -16,11 +16,11 @@ import { env } from "@/lib/env";
 const faqs = [
   {
     q: "How does Hajj 2027 booking actually work?",
-    a: "Compare our packages here, then book and pay only through the official Pak Hajj app or Hajj Portal. We never take Hajj payments directly — our team contacts you after for documents, training and departure.",
+    a: "Compare our packages here, then book and pay only through the official Pak Hajj app or Hajj Portal. We never take Hajj payments directly; our team contacts you after for documents, training and departure.",
   },
   {
     q: "Can I pay Junaidi directly for Hajj?",
-    a: "No. Hajj 2027 bookings and payments go only through the official government portal, per Ministry of Religious Affairs rules — we don't accept Hajj payments on this site or in person.",
+    a: "No. Hajj 2027 bookings and payments go only through the official government portal, per Ministry of Religious Affairs rules; we don't accept Hajj payments on this site or in person.",
   },
   {
     q: "How is Umrah booking different from Hajj?",
@@ -28,7 +28,7 @@ const faqs = [
   },
   {
     q: "What's included in the price shown on a package?",
-    a: "Each package card lists its own inclusions — visa, flights, transport and more vary by package, so check the chips on the specific package rather than assuming one price covers everything.",
+    a: "Each package card lists its own inclusions: visa, flights, transport and more vary by package, so check the chips on the specific package rather than assuming one price covers everything.",
   },
   {
     q: "How quickly do you reply?",

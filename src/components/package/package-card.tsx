@@ -70,7 +70,7 @@ export async function PackageCard({
                 </span>
               )}
               <span>
-                {hotel.city} — {hotel.name}
+                {hotel.city} · {hotel.name}
                 {hotel.distanceMeters && ` · ${hotel.distanceMeters}m`}
               </span>
             </li>

@@ -17,7 +17,7 @@ export const sampleReviews: z.input<typeof Review>[] = [
     author: "Ahmed (sample)",
     season: "Hajj 2025",
     text: {
-      en: "Sample testimonial for layout review only — not a real review. Replace with a real, consented quote before launch.",
+      en: "Sample testimonial for layout review only, not a real review. Replace with a real, consented quote before launch.",
     },
     source: "direct",
     date: "2025-09-01",
@@ -29,7 +29,7 @@ export const sampleReviews: z.input<typeof Review>[] = [
     author: "Sana (sample)",
     season: "Umrah 2025",
     text: {
-      en: "Sample testimonial for layout review only — not a real review. Replace with a real, consented quote before launch.",
+      en: "Sample testimonial for layout review only, not a real review. Replace with a real, consented quote before launch.",
     },
     source: "google",
     date: "2025-06-15",
@@ -41,7 +41,7 @@ export const sampleReviews: z.input<typeof Review>[] = [
     author: "Bilal (sample)",
     season: "Hajj 2024",
     text: {
-      en: "Sample testimonial for layout review only — not a real review. Replace with a real, consented quote before launch.",
+      en: "Sample testimonial for layout review only, not a real review. Replace with a real, consented quote before launch.",
     },
     source: "facebook",
     date: "2024-08-20",

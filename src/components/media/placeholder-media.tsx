@@ -20,7 +20,7 @@ export function PlaceholderMedia({
     >
       {process.env.NODE_ENV !== "production" && (
         <p className="rounded-control bg-paper/80 px-2 py-1 text-caption text-stone">
-          {assetId} — {description}
+          {assetId}: {description}
         </p>
       )}
     </div>
