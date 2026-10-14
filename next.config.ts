@@ -22,8 +22,17 @@ const csp = [
   "default-src 'self'",
   "script-src 'self' 'unsafe-inline' https://www.googletagmanager.com",
   "style-src 'self' 'unsafe-inline'",
-  "img-src 'self' data: blob: https://i.ytimg.com https://www.google-analytics.com",
-  "media-src 'self' blob:",
+  // https://images.pexels.com: the hero's <video poster> (components/home/
+  // hero.tsx) bypasses next/image on purpose — it's a plain attribute on a
+  // native <video>, not an <Image>, so the browser fetches it directly
+  // from Pexels rather than through /_next/image's same-origin proxy the
+  // way every other photo on the site does. Same reasoning for
+  // videos.pexels.com in media-src below — it's the hero's actual video
+  // source. Neither was ever caught by dev-mode testing: these headers
+  // only apply when isProd is true (next build / Docker), never under
+  // `next dev`.
+  "img-src 'self' data: blob: https://i.ytimg.com https://images.pexels.com https://www.google-analytics.com",
+  "media-src 'self' blob: https://videos.pexels.com",
   "font-src 'self'",
   "frame-src https://www.youtube-nocookie.com",
   "connect-src 'self' https://www.google-analytics.com https://region1.google-analytics.com",
