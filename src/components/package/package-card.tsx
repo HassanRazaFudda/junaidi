@@ -100,6 +100,20 @@ export async function PackageCard({
               )}
             </p>
           )}
+          {pkg.priceCheckedOn && (
+            // new-fixes.md §19 "Package card": "Add an 'updated' date if
+            // prices are time-sensitive." schema.ts already requires this
+            // field whenever a live package has a price — it just wasn't
+            // rendered anywhere until now.
+            <p className="text-caption text-stone">
+              {t("priceChecked")}{" "}
+              {new Date(pkg.priceCheckedOn).toLocaleDateString(locale, {
+                day: "numeric",
+                month: "short",
+                year: "numeric",
+              })}
+            </p>
+          )}
           <div className="mt-3 flex gap-2">
             <Link
               href={href}

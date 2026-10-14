@@ -38,9 +38,9 @@ Two more photos were sourced (verified free, credited) but ended up **not placed
 - **Wordmark lockup** — not supplied. No "Junaidi Group" wordmark artwork file exists (only the icon). Header/footer pair the untouched icon with "Junaidi Group" set as real text in the site's own Archivo type (not a redraw of a wordmark that was never supplied).
 - **Favicon** — pending. Needs the SVG redraw above before it can be produced per design.md §8's spec ("the arch/icon mark in ink on marble").
 
-## Footer accreditation badges (added 2026-10-14)
+## Footer accreditation badges — added 2026-10-14, removed 2026-10-14
 
-- `components/layout/footer.tsx`'s bottom badge strip: Government of Pakistan emblem, HOAP, TAAP, IATA, SECP — `public/brand/credentials/*-01.webp`. Client pointed at a low-resolution reference banner and asked for "these badges"; the user then sourced 5 of 9 candidate logos themselves (3 of the 9 were rejected as unrelated marks — Vision 2030, Saudi Ministry of Foreign Affairs, "Rawaf Mina for Pilgrims Services"). Positions are a best-guess match against that banner, not independently confirmed — see DECISIONS.md #5z and CLIENT-TODO.md "Licences and credentials" for what still needs the client's sign-off.
+- Added per a direct client request (a reference banner showing Government of Pakistan/HOAP/TAAP/IATA/SECP marks), then removed the same day per new-fixes.md's explicit redesign guidance ("avoid a large badge/logo strip unless every affiliation is verified and approved") — the marks were never independently confirmed (positions were a best-guess read of a low-resolution image). See DECISIONS.md #5z (added) and #5z+6 (removed) for the full reasoning on both sides. If the client later confirms actual membership in each, re-adding this as real `Credential` records (not a bare image strip) is the better path — see "Licences and credentials" below.
 
 ## Home (design.md §10.1)
 
