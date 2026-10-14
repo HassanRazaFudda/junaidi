@@ -1,25 +1,37 @@
 @import "tailwindcss";
 
 /*
- * Design tokens. v3 (fix.md §3), which explicitly replaces design.md
- * §2.1/§2.5/§3/§5/§7.2/§10 after client feedback that v2's calm-editorial
- * approach read as empty rather than premium for this niche. Colour family
- * (crimson/ink/marble/paper/haze/stone) carries over from v2 unchanged
- * (fix.md §3.1 "what stays"); spacing, radius and the type scale are
- * denser per fix.md §3.2/§3.4/§3.5. See DECISIONS.md #1 for the earlier
- * v1→v2 brass/night→crimson/ink reconciliation this builds on.
+ * Design tokens. v4 (new-fixes.md §12/§13 redesign audit, 2026-10-14),
+ * which replaces v3's crimson/ink/marble palette with the audit's
+ * "grounded hospitality" ink/primary-green/terracotta-accent/ivory
+ * system, at the user's explicit direction.
+ *
+ * Deliberate scope decision: the *names* below (crimson, marble, paper,
+ * stone, line...) are kept exactly as every component already references
+ * them — only the hex *values* change to the new palette's equivalent
+ * role (crimson → new-fixes.md's --color-primary, marble → --color-bg,
+ * stone → --color-text-muted, etc. — mapping below). Renaming every
+ * `bg-crimson`/`text-stone`/`bg-marble` call site across 50+ components to
+ * match the audit's own token names would be a much larger, higher-risk
+ * mechanical pass with no visual difference from this — the colour that
+ * ships is identical either way. That rename is still worth doing later
+ * as a pure refactor, just not bundled into this visual change.
+ * WhatsApp green and star amber are untouched — new-fixes.md doesn't
+ * address either, and both are locked to their real-world brand colour
+ * regardless of the site's own palette (fix.md §3.3's original reasoning
+ * still applies).
  */
 @theme {
-  --color-crimson: #a00c20;
-  --color-crimson-night: #d2404f; /* small accents on dark/ink sections only — fix.md §3.3 */
-  --color-ink: #111726;
-  --color-marble: #eceeea;
-  --color-paper: #ffffff;
-  --color-haze: #d3dee5;
-  --color-stone: #5e655f;
-  --color-ok: #2e6b4e;
-  --color-alert: #a23b2a;
-  --color-line: rgb(17 23 38 / 0.14);
+  --color-crimson: #173f3a; /* was #a00c20 — now new-fixes.md's --color-primary (dark green) */
+  --color-crimson-night: #c85b43; /* was #d2404f — now --color-accent (terracotta), same "small accents on dark sections only" role */
+  --color-ink: #14212b; /* was #111726 — now --color-ink */
+  --color-marble: #f7f6f1; /* was #eceeea — now --color-bg (warm ivory) */
+  --color-paper: #ffffff; /* unchanged — matches --color-surface */
+  --color-haze: #eef1ec; /* was #d3dee5 — now --color-surface-muted */
+  --color-stone: #59656a; /* was #5e655f — now --color-text-muted */
+  --color-ok: #24734e; /* was #2e6b4e — now --color-success */
+  --color-alert: #b42318; /* was #a23b2a — now --color-error */
+  --color-line: #dde2dc; /* was rgb(17 23 38 / .14) — now --color-border (solid, not translucent, per new-fixes.md §13's literal "1px solid --color-border") */
 
   /* fix.md §3.3: WhatsApp's own green, recognised instantly — used only on
    * the WhatsApp button itself (icon already used its own green; now the
@@ -29,9 +41,9 @@
   --color-whatsapp-ink: #0b3d2e;
   --color-star: #e0a526;
 
-  --radius-control: 10px; /* buttons, inputs — fix.md §3.5 (was 6px in v2) */
-  --radius-panel: 14px; /* drawers, lightbox */
-  --radius-card: 16px; /* fix.md §3.5: package/hotel/testimonial cards */
+  --radius-control: 10px; /* new-fixes.md §13 range is 8–10px; already in range */
+  --radius-panel: 18px; /* was 14px — new-fixes.md §13 */
+  --radius-card: 16px; /* new-fixes.md §13 range is 12–16px; already in range */
 
   --ease-out-quint: cubic-bezier(0.22, 1, 0.36, 1);
   --ease-in-out-cubic: cubic-bezier(0.65, 0, 0.35, 1);
@@ -132,7 +144,11 @@
     outline-offset: 3px;
   }
   .font-display {
-    font-variation-settings: "wdth" 112;
+    /* was Archivo's "wdth" (width) axis at 112 — Inter's variable font
+     * doesn't expose a width axis the same way, so this is weight +
+     * tracking only now. new-fixes.md §18's display weight range is
+     * 650–750; kept 650 (lighter end) since Inter reads heavier than
+     * Archivo did at the same numeric weight. */
     font-weight: 650;
     letter-spacing: -0.01em;
   }

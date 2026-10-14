@@ -1,8 +1,11 @@
-import { Archivo, Noto_Nastaliq_Urdu, Amiri } from "next/font/google";
+import { Inter, Noto_Nastaliq_Urdu, Amiri } from "next/font/google";
 
-export const archivo = Archivo({
+// new-fixes.md §12/§18: "a modern, highly legible sans-serif such as
+// Inter or Manrope" for interface/body copy, replacing v3's Archivo.
+// Inter chosen over Manrope — slightly more neutral/widely used, no
+// variable-width axis to reconcile with the old .font-display treatment.
+export const archivo = Inter({
   subsets: ["latin"],
-  axes: ["wdth"],
   variable: "--font-archivo",
   display: "swap",
 });
