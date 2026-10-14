@@ -45,6 +45,12 @@ const securityHeaders = [
 ];
 
 const nextConfig: NextConfig = {
+  // NEXT_OUTPUT=standalone (Dockerfile's build stage only) emits
+  // .next/standalone, which the runner stage copies instead of full
+  // node_modules. Conditional so a plain local `pnpm build` or a Vercel
+  // deploy — neither of which sets this — stays exactly as it was.
+  ...(process.env.NEXT_OUTPUT === "standalone" ? { output: "standalone" } : {}),
+
   // Rendering model (recommended from 16.4, default in 17) — code.md §3.1
   cacheComponents: true,
   partialPrefetching: true,

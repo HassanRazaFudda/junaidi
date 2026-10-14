@@ -1,0 +1,19 @@
+# Keep the build context small and the `COPY . .` layer cache stable: files
+# listed here can change without invalidating (and re-running) the build step.
+node_modules
+.next
+.git
+.env*
+*.tsbuildinfo
+next-env.d.ts
+*.log
+.DS_Store
+coverage
+playwright-report
+test-results
+.vscode
+.idea
+.claude
+*.md
+Dockerfile
+.dockerignore
