@@ -63,7 +63,7 @@ export async function HajjBand({
         </Reveal>
 
         <StaggerGrid
-          className="scrollbar-hide flex min-w-0 snap-x snap-mandatory gap-6 overflow-x-auto"
+          className="scrollbar-hide flex min-w-0 snap-x snap-mandatory gap-6 overflow-x-auto overscroll-x-contain"
           itemClassName="w-[75%] shrink-0 snap-start sm:w-80"
           items={tiers.map((pkg) => ({
             id: pkg.id,

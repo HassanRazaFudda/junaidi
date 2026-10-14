@@ -100,6 +100,12 @@
     font-family: var(--font-sans);
     font-size: var(--text-body);
     line-height: 1.6;
+    /* html's overflow-x: hidden above isn't reliable alone on every mobile
+     * browser (mobile Safari in particular can still rubber-band the page
+     * horizontally on touch drag without this also being set on body) —
+     * reported live: reaching a horizontal snap/marquee row (Hajj band,
+     * past groups) let a touch drag pull the whole page sideways. */
+    overflow-x: hidden;
   }
   html[lang="ur"] body {
     font-family: var(--font-urdu);

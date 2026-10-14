@@ -23,7 +23,7 @@ export async function SeasonStrip({ locale }: { locale: Locale }) {
           // instead (same wrap/track/copy pattern, globals.css). sm+ has
           // room for both on one row, so this reverts to plain inline text
           // and the duplicate copy is hidden.
-          <div className="season-strip-wrap min-w-0 overflow-hidden sm:overflow-visible">
+          <div className="season-strip-wrap min-w-0 overflow-hidden overscroll-x-contain sm:overflow-visible">
             <div className="season-strip-track flex w-max gap-16 whitespace-nowrap sm:w-auto sm:gap-0 sm:whitespace-normal">
               <Link href={banner.href} className="underline-offset-4 hover:underline">
                 {banner.message}
