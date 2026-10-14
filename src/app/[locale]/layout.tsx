@@ -1,4 +1,4 @@
-import type { Metadata } from "next";
+import type { Metadata, Viewport } from "next";
 import { notFound } from "next/navigation";
 import { hasLocale } from "next-intl";
 import { NextIntlClientProvider } from "next-intl";
@@ -36,6 +36,25 @@ export const metadata: Metadata = {
   // unconfirmed and gated elsewhere (DECISIONS.md #3); this description
   // only states the one thing that's actually settled, the tagline itself.
   description: "Hajj and Umrah from Karachi, with a team that travels with you.",
+};
+
+// This was missing entirely — confirmed live via `curl | grep viewport`
+// returning nothing. In the App Router, `viewport` is its own export
+// (Next.js split it out of `metadata` years ago); defining a custom
+// `metadata` object without a matching `viewport` export does not fall
+// back to a sane default. Without this tag, mobile browsers render the
+// page at a desktop-width virtual viewport (~980px) and scale it down —
+// the screen itself never rotates (confirmed live), but the page becomes
+// pannable sideways within it, and every `sm:`/`lg:` breakpoint evaluates
+// against that fake ~980px width instead of the real device width. That's
+// what was actually happening on the Hajj band's package carousel: real
+// mobile width is ~390-440px, but the cards' `sm:w-80` fixed-width rule
+// (meant for ≥640px) was firing anyway, because the browser's own
+// virtual-viewport width goes past 640 despite the physical screen never
+// doing so.
+export const viewport: Viewport = {
+  width: "device-width",
+  initialScale: 1,
 };
 
 export default async function LocaleLayout({

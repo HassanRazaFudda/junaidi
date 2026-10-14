@@ -95,6 +95,21 @@
      * radius to that one component's own clipping instead of the whole
      * page, without hiding content that's supposed to scroll internally. */
     overflow-x: hidden;
+    /* Reported live on mobile (iOS Safari): dragging a horizontal
+     * carousel (Hajj band's snap-scroll cards, the trust/season/past-
+     * groups marquees) rubber-banded the *whole page* sideways — a
+     * native touch-gesture bounce, not a layout overflow: confirmed live
+     * by polling document.documentElement.scrollWidth/scrollLeft through
+     * the drag and seeing neither ever move (overscroll-behavior-x:
+     * contain on the carousels, added earlier, doesn't stop this — that
+     * property governs scroll *chaining* once a scroll starts, not which
+     * element's touch gesture the page claims in the first place).
+     * touch-action: pan-y tells the browser this page only handles
+     * vertical pan gestures by default, so a horizontal drag is never
+     * claimed by the page/body scroller — each horizontal-scroll
+     * component below explicitly opts back in with its own
+     * touch-action: pan-x so it keeps working. */
+    touch-action: pan-y;
   }
   body {
     font-family: var(--font-sans);

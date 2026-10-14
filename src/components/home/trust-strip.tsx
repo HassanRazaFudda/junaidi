@@ -87,7 +87,7 @@ export async function TrustStrip({ locale }: { locale: Locale }) {
     // scrollable list instead of a frozen half-visible track: the
     // duplicate is hidden and overflow goes back to auto so no credential
     // item is ever lost, only the auto-slide is removed.
-    <div className="trust-strip-wrap min-w-0 overflow-hidden overscroll-x-contain border-y border-line bg-paper">
+    <div className="trust-strip-wrap min-w-0 touch-pan-x overflow-hidden overscroll-x-contain border-y border-line bg-paper">
       <div className="trust-strip-track flex w-max gap-6 py-4 text-meta whitespace-nowrap">
         <ul className="flex shrink-0 gap-6">{items}</ul>
         <ul className="trust-strip-copy flex shrink-0 gap-6" aria-hidden>

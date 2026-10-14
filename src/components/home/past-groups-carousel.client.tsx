@@ -21,7 +21,7 @@ import type { ReactNode } from "react";
 // the tab order, in one standard HTML attribute.
 export function PastGroupsCarousel({ items }: { items: { id: string; node: ReactNode }[] }) {
   return (
-    <div className="past-groups-wrap mt-6 min-w-0 overflow-hidden overscroll-x-contain">
+    <div className="past-groups-wrap mt-6 min-w-0 touch-pan-x overflow-hidden overscroll-x-contain">
       <div className="past-groups-track flex w-max gap-4 pb-2">
         <div className="flex shrink-0 gap-4">
           {items.map((i) => (
