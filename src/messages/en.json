@@ -55,6 +55,25 @@
     "ctaPackages": "See Hajj 2027 packages",
     "ctaWhatsapp": "Message us on WhatsApp"
   },
+  "servicePathways": {
+    "eyebrow": "Where to start",
+    "heading": "Three ways to begin",
+    "umrah": {
+      "label": "Umrah packages",
+      "description": "Compare hotels, nights and pricing for Umrah departures from Karachi.",
+      "cta": "View Umrah packages"
+    },
+    "hajj": {
+      "label": "Hajj 2027",
+      "description": "How private Hajj 2027 booking works, and the packages available.",
+      "cta": "View Hajj 2027"
+    },
+    "other": {
+      "label": "Other travel services",
+      "description": "Flights, visas, international tours and hotel bookings.",
+      "cta": "See other services"
+    }
+  },
   "servicesCards": {
     "eyebrow": "Other services",
     "heading": "Everything else for your trip",

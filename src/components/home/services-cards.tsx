@@ -51,7 +51,7 @@ export async function ServicesCards() {
   const [t, site] = await Promise.all([getTranslations("servicesCards"), getSiteSettings()]);
 
   return (
-    <Section>
+    <Section id="other-services">
       <Container>
         <Reveal>
           <p className="text-caption font-medium text-crimson">{t("eyebrow")}</p>
