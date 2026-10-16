@@ -36,7 +36,15 @@ export async function UmrahPackages({
   ]);
   if (packages.length === 0) return null;
 
-  const items = packages.map((pkg) => ({
+  // new-fixes.md §16 "Featured Umrah packages": "Show 3 cards initially;
+  // 'View all Umrah packages' leads to listing." This component is shared
+  // between the home-page preview (seeAllLink: true) and the full /umrah
+  // index (seeAllLink: false, fix.md §11 step 5) — only the preview caps
+  // itself to 3; the index keeps showing everything. Only matters once
+  // more than 2-3 real Umrah packages exist, but the cap belongs here now
+  // so the home page doesn't silently grow into a full catalog later.
+  const shown = seeAllLink ? packages.slice(0, 3) : packages;
+  const items = shown.map((pkg) => ({
     id: pkg.id,
     month: pkg.month ? pick(pkg.month, locale) : null,
     tier: pkg.tierLabel ? pick(pkg.tierLabel, locale) : null,

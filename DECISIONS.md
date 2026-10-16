@@ -270,6 +270,8 @@ The complication: both posts advertised a single 20 Aug departure that has alrea
 - Facebook's "Hours" field says "Always open" — read as an unedited platform default most businesses never bother changing, not a real confirmed schedule. `CLIENT-TODO.md`'s office-hours item stays open, with this noted so a future pass doesn't re-surface the same unreliable field as if it were new information.
 - The landline on flyer footers consistently reads `+92 21 34130184-87`, one digit short of `site.ts`'s existing `021-34130184-88` range. Flagged in `CLIENT-TODO.md` rather than silently "corrected" either way — no way to tell from a flyer alone which figure is the typo.
 
+**Used without a judgment call:** the office address Facebook's Details page lists matches `site.ts` exactly, confirming it rather than changing it — the one addition was a postal code (07483) Facebook had that `site.ts` didn't, appended to the existing address lines.
+
 ## 5z+8. new-fixes.md Stage 4: added the homepage's missing "Service pathways" section
 
 Stage 3 (shared components — header, buttons, cards, forms, accordions, footer) closed out across the prior few commits: header/button/accordion were already compliant on review, PackageCard got its `priceCheckedOn` line, the footer badge row was removed (#5z+6), and both inquiry forms got the privacy/consent text new-fixes.md §13 requires (none existed before — a real gap, not a style nit).
@@ -302,4 +304,12 @@ This directly conflicted with new-fixes.md §16's own FAQ bullet, which wants FA
 
 Removed the `env.NEXT_PUBLIC_CONTENT_MODE` check and the `<SampleBadge />` render from `site-faq.tsx` — the badge was never accurate for this content (it isn't sample/fabricated, so "Sample, for review only" would be actively wrong now that it's live). Verified via a rebuilt dev server (a stale Turbopack incremental-cache panic from this session's many dev-server restarts on different ports required a `.next` cache clear first, unrelated to this change — `pnpm check`'s typecheck/lint/tests all passed cleanly before that happened) that the FAQ heading and both referenced answers render on the home page, and that "Sample, for review only" is correctly absent.
 
-**Used without a judgment call:** the office address Facebook's Details page lists matches `site.ts` exactly, confirming it rather than changing it — the one addition was a postal code (07483) Facebook had that `site.ts` didn't, appended to the existing address lines.
+## 5z+11. Rest of §16 reviewed: PastGroups and the final CtaBand were already compliant; UmrahPackages' home-page preview was missing its 3-card cap
+
+Finished the §16 section-by-section pass. `PastGroups` already satisfies every bullet: real season-labelled titles ("VIP camps in Mina, Hajj 2025," not generic captions), no autoplay-with-sound (click-to-open YouTube lightbox, not an ambient background video), and `globals.css`'s `@media (prefers-reduced-motion: reduce)` block already disables the auto-marquee and falls back to manual scroll, same pattern as the trust strip. The final contact CTA (`CtaBand`) already matches its bullet too — WhatsApp + call actions, no fabricated office-hours claim beyond the already-established "2 office hours" reply time.
+
+One real gap: §16's Featured Umrah packages bullet says "Show 3 cards initially; 'View all Umrah packages' leads to listing." `UmrahPackages` is shared between the home-page preview (`seeAllLink: true`) and the full `/umrah` index (`seeAllLink: false`) — but both rendered every real package with no cap at all. Invisible today with only 2 real packages, but a latent bug: once more Umrah tiers land, the "featured" home section would silently grow into a full catalog instead of a focused teaser, defeating the point of having a separate index page. `HajjBand` already had this right (`packages.slice(0, 3)`); added the same `seeAllLink ? packages.slice(0, 3) : packages` to `UmrahPackages`.
+
+Left `HajjBand`'s own §16 bullets (dark background with "a real and accurately labeled operational photo," explicit "View Hajj 2027 packages"/"Understand the booking process" CTAs) untouched for the same reason as `WhyJunaidi` in #5z+9 — the section renders nothing at all right now (zero real Hajj packages), so polishing copy or sourcing a photo for content nobody can see yet isn't useful work; it stays blocked on the same real package data CLIENT-TODO.md already tracks.
+
+This closes out new-fixes.md's Stage 4 (homepage restructure) against §16's full spec.
