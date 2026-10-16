@@ -47,7 +47,7 @@ export default async function HomePage({ params }: { params: Promise<{ locale: s
       <WhyJunaidi />
       <PastGroups locale={l} />
       <ServicesCards />
-      <Hotels />
+      <Hotels locale={l} />
       <Reviews locale={l} />
       <SiteFaq />
       <CtaBand />

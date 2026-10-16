@@ -53,6 +53,13 @@ export async function Footer() {
               {site.landline}
             </a>
           </p>
+          {site.email && (
+            <p className="mt-1">
+              <a href={`mailto:${site.email}`} className="hover:text-crimson">
+                {site.email}
+              </a>
+            </p>
+          )}
           {site.facebookUrl && (
             <a
               href={site.facebookUrl}
