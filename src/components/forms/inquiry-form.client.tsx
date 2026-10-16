@@ -7,6 +7,7 @@ import { AnimatePresence } from "motion/react";
 import * as m from "motion/react-m";
 import { submitInquiry, type InquiryState } from "./actions";
 import { whatsappUrl } from "@/lib/whatsapp";
+import { Link } from "@/i18n/navigation";
 import { cn } from "@/lib/cn";
 
 const initialState: InquiryState = { status: "idle" };
@@ -158,6 +159,14 @@ export function InquiryForm({ whatsappNumber }: { whatsappNumber: string }) {
               className={inputClass}
             />
           </Field>
+
+          <p className="text-caption text-stone">
+            {t("consentText")}{" "}
+            <Link href="/privacy" className="underline underline-offset-4 hover:text-crimson">
+              {t("consentPrivacyLink")}
+            </Link>
+            .
+          </p>
 
           <button
             type="submit"

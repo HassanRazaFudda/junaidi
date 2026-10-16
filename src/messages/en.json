@@ -139,7 +139,9 @@
     "continueOnWhatsapp": "Continue on WhatsApp",
     "errorHeading": "Please check the form",
     "serverErrorHeading": "We couldn't send that just now",
-    "serverErrorBody": "Please try again, or message us directly on WhatsApp instead."
+    "serverErrorBody": "Please try again, or message us directly on WhatsApp instead.",
+    "consentText": "By submitting, you agree to be contacted about this inquiry. See our",
+    "consentPrivacyLink": "Privacy Policy"
   },
   "pendingPage": {
     "heading": "Being finalised",
