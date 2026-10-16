@@ -31,6 +31,7 @@ export default async function UmrahIndexPage({ params }: { params: Promise<{ loc
       <Section noPaddingBottom>
         <Container>
           <h1 className="font-display text-h1">{t("umrahHeading")}</h1>
+          <p className="mt-2 max-w-prose text-lead text-stone">{t("umrahIntro")}</p>
         </Container>
       </Section>
       <UmrahPackages

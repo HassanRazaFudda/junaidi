@@ -66,7 +66,7 @@
     "hajj": {
       "label": "Hajj 2027",
       "description": "How private Hajj 2027 booking works, and the packages available.",
-      "cta": "View Hajj 2027"
+      "cta": "View Hajj 2027 packages"
     },
     "other": {
       "label": "Other travel services",
@@ -102,13 +102,14 @@
   "packages": {
     "heading": "Hajj 2027 packages",
     "umrahHeading": "Umrah packages",
+    "umrahIntro": "Compare dates, hotel locations, room sharing and included services before you enquire.",
     "umrahEyebrow": "Umrah packages",
     "umrahSubheading": "Choose your month",
     "compare": "Compare packages",
     "filterShort": "Short",
     "filterLong": "Long",
     "filterAll": "All",
-    "view": "View",
+    "view": "View package",
     "priceChecked": "Price checked on",
     "soldOut": "Sold out",
     "archived": "Archived",
@@ -118,7 +119,7 @@
     "whatsappAboutPackage": "WhatsApp us about this package",
     "nights": "nights",
     "from": "From",
-    "seeAllUmrah": "See all Umrah packages"
+    "seeAllUmrah": "View all Umrah packages"
   },
   "pastGroups": {
     "heading": "Past groups"

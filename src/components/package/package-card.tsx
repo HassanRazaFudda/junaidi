@@ -1,6 +1,6 @@
 import Image from "next/image";
 import { getTranslations } from "next-intl/server";
-import { Star, Check } from "lucide-react";
+import { Star, Check, X } from "lucide-react";
 import { Link } from "@/i18n/navigation";
 import { WhatsAppIcon } from "@/components/ui/whatsapp-icon";
 import { buttonStyles } from "@/components/ui/button";
@@ -70,8 +70,15 @@ export async function PackageCard({
                 </span>
               )}
               <span>
-                {hotel.city} · {hotel.name}
-                {hotel.distanceMeters && ` · ${hotel.distanceMeters}m`}
+                {/* new-fixes.md §15.2: card must show "room-sharing basis"
+                    alongside each hotel, not just name/distance. */}
+                {[
+                  `${hotel.city} · ${hotel.name}`,
+                  hotel.distanceMeters ? `${hotel.distanceMeters}m` : null,
+                  pick(hotel.roomSharing, locale),
+                ]
+                  .filter(Boolean)
+                  .join(" · ")}
               </span>
             </li>
           ))}
@@ -82,6 +89,20 @@ export async function PackageCard({
             {pkg.included.slice(0, 4).map((item) => (
               <li key={pick(item, locale)} className="flex items-center gap-1">
                 <Check className="size-3 text-crimson" aria-hidden />
+                {pick(item, locale)}
+              </li>
+            ))}
+          </ul>
+        )}
+
+        {pkg.notIncluded.length > 0 && (
+          // new-fixes.md §15.2: card must also show "excluded items," not
+          // just inclusions — hidden (not a placeholder) when unknown,
+          // same "never invent, never show TBD" rule as everything else.
+          <ul className="mt-2 flex flex-wrap gap-x-3 gap-y-1 text-meta text-stone">
+            {pkg.notIncluded.slice(0, 3).map((item) => (
+              <li key={pick(item, locale)} className="flex items-center gap-1">
+                <X className="size-3 text-stone" aria-hidden />
                 {pick(item, locale)}
               </li>
             ))}

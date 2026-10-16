@@ -8,6 +8,7 @@ import { StayBlock } from "@/components/package/stay-block";
 import { TravelBlock } from "@/components/package/travel-block";
 import { InclusionsList } from "@/components/package/inclusions-list";
 import { Itinerary } from "@/components/package/itinerary";
+import { UmrahCancellationNotice } from "@/components/package/umrah-cancellation-notice";
 import { Faq } from "@/components/package/faq";
 import { PackageJsonLd } from "@/components/seo/package-jsonld";
 import { getPackage, listPackages, getSiteSettings } from "@/content/queries";
@@ -66,6 +67,7 @@ export default async function UmrahPackageDetailPage({
           locale={locale as Locale}
         />
         <Itinerary itinerary={pkg.itinerary} locale={locale as Locale} />
+        <UmrahCancellationNotice />
         <Faq faqs={pkg.faqs} locale={locale as Locale} />
       </Container>
     </Section>
