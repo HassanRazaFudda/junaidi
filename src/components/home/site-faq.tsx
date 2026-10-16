@@ -1,18 +1,19 @@
 import { Section } from "@/components/ui/section";
 import { Container } from "@/components/ui/container";
 import { Accordion } from "@/components/ui/accordion.client";
-import { SampleBadge } from "@/components/ui/sample-badge";
 import { Reveal } from "@/components/ui/reveal.client";
-import { env } from "@/lib/env";
 
-// fix.md §2/§7: "FAQ — marble, 6 questions, two-column on desktop." Same
-// treatment as WhyJunaidi: demo-mode-only, sample-labelled, because fix.md
-// §10's own acceptance criteria scopes this section to demo mode, and
-// nothing here should assert a policy the client hasn't actually confirmed.
-// Every answer below only restates facts already established elsewhere in
-// this codebase (the booking-steps copy, the no-Hajj-payment hard rule,
-// the office address, the "2 office hours" reply claim) — none of it is a
-// new invented fact, just the FAQ framing of existing ones.
+// fix.md §2/§7: "FAQ — marble, 6 questions, two-column on desktop." Was
+// originally demo-mode-only per fix.md §10's acceptance criteria, unlike
+// WhyJunaidi's genuinely-unconfirmed claims — every answer here only
+// restates facts already established and already live elsewhere in this
+// codebase (the booking-steps copy, the no-Hajj-payment hard rule, the
+// office address, the "2 office hours" reply claim CtaBand already shows
+// live, unconditionally). Un-gated per new-fixes.md §16's FAQ spec and
+// the user's explicit confirmation (DECISIONS.md #5z+10) rather than
+// leaving genuinely real content hidden behind a stale demo-only scope.
+// No SampleBadge here any more either — this was never sample content,
+// just mislabelled as such by inheriting WhyJunaidi's treatment.
 const faqs = [
   {
     q: "How does Hajj 2027 booking actually work?",
@@ -41,8 +42,6 @@ const faqs = [
 ] as const;
 
 export function SiteFaq() {
-  if (env.NEXT_PUBLIC_CONTENT_MODE !== "demo") return null;
-
   const items = faqs.map((f, i) => ({ id: String(i), question: f.q, answer: f.a }));
   const left = items.slice(0, 3);
   const right = items.slice(3);
@@ -58,7 +57,6 @@ export function SiteFaq() {
           <Accordion items={left} />
           <Accordion items={right} />
         </div>
-        <SampleBadge className="mt-6" />
       </Container>
     </Section>
   );
